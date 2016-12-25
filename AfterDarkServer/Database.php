@@ -8,8 +8,8 @@ class Database {
     //const database_IP = "116.86.71.55";
     const database_IP = "127.0.0.1";
     const database_Name = "afterdarktest001";
-    const username = "mooselliot";
-    const password = "S9728155f";
+    const username = "root";
+    const password = "root";
 
     static $con;
 
@@ -27,12 +27,12 @@ class Database {
 
     public static function QueryStmtToArrayAssoc(mysqli_stmt $stmt) {
         $stmt->execute();
-        $result = $stmt->get_result();
+        $result = Database::get_result($stmt);
 
         $outputArray = array();
 
         //row is a dictionary here
-        while ($row = $result->fetch_assoc()) {
+        foreach ($result as $row) {
             array_push($outputArray, $row);
         }
 
@@ -457,6 +457,21 @@ class Database {
         }
 
         return $questionMarks;
+    }	
+    
+    public static function get_result( $Statement ) {
+    $RESULT = array();
+    $Statement->store_result();
+    for ( $i = 0; $i < $Statement->num_rows; $i++ ) {
+        $Metadata = $Statement->result_metadata();
+        $PARAMS = array();
+        while ( $Field = $Metadata->fetch_field() ) {
+            $PARAMS[] = &$RESULT[ $i ][ $Field->name ];
+        }
+        call_user_func_array( array( $Statement, 'bind_result' ), $PARAMS );
+        $Statement->fetch();
     }
+    return $RESULT;
+}
 
 }

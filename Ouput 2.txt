@@ -1,0 +1,10 @@
+
+C:\MAMP\htdocs\Services>git pull origin master 
+
+C:\MAMP\htdocs\Services>git pull origin master 
+
+C:\MAMP\htdocs\Services>git pull origin master 
+
+C:\MAMP\htdocs\Services>cd C:\MAMP\htdocs 
+
+C:\MAMP\htdocs>git pull origin master 

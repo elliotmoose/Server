@@ -7,24 +7,33 @@ and open the template in the editor.
 <html>
     <head>
         <title>Home</title>
-        <link rel ="stylesheet" type="text/css" href ="HomeLayout.css" />
+
+
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"">
+		<link rel ="stylesheet" type="text/css" href ="HomeLayout.css"/>
+
     </head>
     
     <body>
         <ul id = "NavigationBar">
-            <li><a class = "navElement"> AFTERDARK </a></li>
+            <li><a class = "navElement" class = "mobileCollapse"> AFTERDARK </a></li>
             <li><a class = "navElement" href="default.asp">Home</a></li>
             <li><a class = "navElement" href="news.asp">News</a></li>
             <li><a class = "navElement" href="contact.asp">Contact</a></li>
             <li><a class = "navElement" href="about.asp">About</a></li>
+			<li><a class = "rightNavElement" href="about.asp">Login</a></li>
+			<li><a class = "rightNavElement" href="about.asp">Sign Up</a></li>
         </ul>
         
         <div id = "container">
-            
-            <img src="../Website/Images/NightCityBlurr.jpeg" alt="mainImage" style="width:100%;height:auto;" id = "mainImage">            
-            
+            <div id = "AfterdarkBannerContainer">
+			    <img src="../Website/Images/NightCityBlurr.jpeg" alt="mainImage" style="width:100%;height:auto;" id = "mainImage">            
+				<div id = "AfterdarkBanner">AFTERDARK</div>
+				<div id = "AfterdarkBannerSubtitle">Your Passport To Bars</div>
+
+			</div>
+
             <div id = "main">
                 <h2>hello</h2>
                 <p>heyyyyyyy</p>

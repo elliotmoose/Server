@@ -1,0 +1,90 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 26 Dec, 2016, 4:28:00 PM
+    Author     : elliotmoose
+*/
+
+body
+{
+   margin: 0;
+}
+#container
+{
+    left : 100px;
+    width: 100%;
+}
+
+.navElement
+{
+    float : left;
+    display: block;
+    color: #000;
+    /*top : 0;*/
+    padding: 15px 8px 15px 8px;
+    text-align: center;
+    text-decoration: none;
+}
+
+#NavigationBar
+{
+    font-family : Ailerons;
+    background-color: #EEE;
+
+    position: fixed;
+    float:top;
+     
+    top : 0;
+    left : 0;
+    
+    width : 100%;
+    height: 50px;
+    padding: 0px;
+
+}
+
+ul
+{
+    margin-top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: red;
+    list-style-type: none;
+}
+
+#mainImage
+{
+    width : 100%;
+    height: 50px;
+    left: 0;
+}
+
+img{
+    left: 0px;
+    margin: 0px;
+}
+
+
+
+
+/* Change the link color on hover */
+li a:hover {
+    background-color: #555;
+    color: white;
+}
+
+
+#main
+{
+    clear: both;
+    float : right;
+    background-color: grey;
+    color: white;
+    height : 1000px;
+}
+
+
+

@@ -85,8 +85,7 @@ ul
 
 #mainImage
 {
-	clip: rect(0px,0px,0px,100px);
-	overflow : hidden;
+	
 }
 #AfterdarkBanner
 {
@@ -104,6 +103,7 @@ ul
 }
 #AfterdarkBannerContainer
 {
+	
 	width : 100%;
     height: 1000px;
 	position : relative;
@@ -150,10 +150,28 @@ li a:hover {
     
 }
 
-@media screen and (max-width: 900px)
+@media screen and (max-width: 1100px)
 {
-	body
+	.mobileCollapse
 	{
-		background-color:red;
+		float : none;
+	}
+	
+	.mobileHide
+	{
+		display:none;
+	}
+	
+	#AfterdarkBannerContainer
+{
+	
+	width : auto;
+    height: 500px;
+	overflow : hidden;
+}
+
+	img
+	{
+		style-type: width:auto height:50px
 	}
 }

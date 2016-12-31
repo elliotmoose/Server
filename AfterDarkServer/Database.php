@@ -138,7 +138,7 @@ class Database {
         if($stmt -> execute())
         {
             if ($result = Database::get_result($stmt)) {
-                $row = $result ->fetch_assoc();
+                $row = $result;
                 $output = $row;
                 
                 return $output;

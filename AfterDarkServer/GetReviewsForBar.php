@@ -18,6 +18,7 @@ $outputArrayAssoc = Database::QueryStringToArrayAssoc($sql);
 //get user review
 $user_review = Database::StatementSelectWhere('*', 'reviews', ['User_ID','Bar_ID'], [$User_ID,$Bar_ID], 'ss');
 
+echo json_encode($user_review);
 
 //if there is no user review
 if(count($user_review) <= 0)

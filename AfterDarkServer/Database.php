@@ -137,7 +137,7 @@ class Database {
         
         if($stmt -> execute())
         {
-            if ($result = $stmt->get_result()) {
+            if ($result = Database::get_result($stmt)) {
                 $row = $result ->fetch_assoc();
                 $output = $row;
                 
@@ -204,9 +204,8 @@ class Database {
         
         if($stmt -> execute())
         {
-            if ($result = $stmt->get_result()) {
+            if ($result = Database::get_result($stmt)) {
 
-                
                 $row = $result ->fetch_array();
                 $output = $row[0];
                 return $output;
@@ -231,7 +230,7 @@ class Database {
         
         $stmt -> bind_param("s", $param);
         $stmt ->execute();
-        $result = $stmt -> get_result();
+        $result = Database::get_result($stmt);
         $outputArray = $result ->fetch_array();
         
         $output = $outputArray[0];

@@ -35,8 +35,8 @@ if($Bar_Owner_Name != null && $Bar_Owner_ID != null && $Bar_ID != null)
 {
     //get name and password from ID
 
-    $result = Database::StatementSelectWhere("Username,Merchant_ID,Bar_ID", "merchant_info", ["Merchant_ID"], [$Bar_Owner_ID], "s");    
-    
+    $output = Database::StatementSelectWhere("Username,Merchant_ID,Bar_ID", "merchant_info", ["Merchant_ID"], [$Bar_Owner_ID], "s");    
+    $result = $output[0];
     if($result['Username'] == $Bar_Owner_Name && $result['Merchant_ID'] == $Bar_Owner_ID && $result['Bar_ID'] == $Bar_ID)
     {
         $columns = [];

@@ -12,25 +12,25 @@ $resultString = "cant connect to database";
 
 $query = sprintf("SELECT  * FROM merchant_info WHERE Username = \"%s\" ",$username);
 
-$resultString = "Invalid ID";
-if($result = mysqli_query($con,$query))
+$output = Database::StatementSelectWhere("*", "merchant_info", ["Username"], [$username], "s");
+
+if($output == null)
 {
-while($row = mysqli_fetch_assoc($result))
-{
-if($row['Password'] == $password)
-{
-    Output::SuccessWithArray($row);
-}
-else
-{       
-    Output::Fail("Invalid Password");
-}
-}
+    Output::Fail("Invalid Username");
 }
 else
 {
-    Output::Fail("Invalid ID");
+    $info = $output[0];
+
+    if ($info['Password'] == $password) {
+        Output::SuccessWithArray($info);
+    } else {
+        Output::Fail("Invalid Password");
+    }
+    
 }
+
+    
 
 
 Database::EndConnection();

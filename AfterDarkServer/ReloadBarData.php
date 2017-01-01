@@ -14,7 +14,7 @@ $output = Database::StatementSelectWhere("*", "bar_info", $columns, $values, $ty
 
 if($output != NULL)
 {
-    Output::SuccessWithArray($output);
+    Output::SuccessWithArray($output[0]);
 }
 else
 {

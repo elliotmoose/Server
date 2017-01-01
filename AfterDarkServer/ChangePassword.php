@@ -20,7 +20,8 @@ $columns = array("User_ID");
 $values = array($userID);
 
 
-$output = Database::StatementSelectWhere("User_Password", "user_info", $columns, $values,"s");
+$result = Database::StatementSelectWhere("User_Password", "user_info", $columns, $values,"s");
+$output = $result[0];
 $oldPassFromDB = $output['User_Password'];
 if($oldPassFromDB == null)
 {

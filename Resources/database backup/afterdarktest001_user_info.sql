@@ -27,8 +27,11 @@ CREATE TABLE `user_info` (
   `User_Name` varchar(45) DEFAULT NULL,
   `User_Password` varchar(45) DEFAULT NULL,
   `User_Email` varchar(45) DEFAULT NULL,
+  `User_Contact` varchar(45) DEFAULT NULL,
+  `User_Gender` varchar(45) DEFAULT NULL,
+  `User_Birthday` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`User_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +40,7 @@ CREATE TABLE `user_info` (
 
 LOCK TABLES `user_info` WRITE;
 /*!40000 ALTER TABLE `user_info` DISABLE KEYS */;
-INSERT INTO `user_info` VALUES (1,'mooselliot','S9728155f','elliot_koh_1997@yahoo.com.sg');
+INSERT INTO `user_info` VALUES (1,'mooselliot','S9728155f','elliot_koh_1997@yahoo.com.sg',NULL,NULL,NULL),(3,'test','hello','h@g.c',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `user_info` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-31 11:33:46
+-- Dump completed on 2017-01-07 13:25:48

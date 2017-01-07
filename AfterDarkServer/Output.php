@@ -20,6 +20,7 @@ class Output
              
         
         echo json_encode($output);
+        die();
     }
     
     public static function Fail(String $detail)

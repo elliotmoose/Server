@@ -239,9 +239,9 @@ class Database {
     
     public static function Insert(String $table,String $columns,String $types, array $values)
     {
-        self::QuestionMarksFromArray($values);
+        $questionMarks = self::QuestionMarksFromArray($values);
         
-
+        $number_of_values = count($values);
         
         $query = "INSERT INTO $table ($columns) VALUES ($questionMarks)";
         

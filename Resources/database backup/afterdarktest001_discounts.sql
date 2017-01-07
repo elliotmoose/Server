@@ -39,7 +39,7 @@ CREATE TABLE `discounts` (
 
 LOCK TABLES `discounts` WRITE;
 /*!40000 ALTER TABLE `discounts` DISABLE KEYS */;
-INSERT INTO `discounts` VALUES (0,'Aftedark Classics','Receive 10% discount at any AfterDark registered Bar!',1,'10%'),(1,'Bar 1 specials','Receive 5% discount with main course',0,'5%');
+INSERT INTO `discounts` VALUES (0,'Aftedark Classics','Receive 10% discount at any AfterDark registered Bar!',1,'50%'),(1,'Bar 1 specials','Receive 5% discount with main course',0,'5%');
 /*!40000 ALTER TABLE `discounts` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-31 11:33:46
+-- Dump completed on 2017-01-07 13:25:48

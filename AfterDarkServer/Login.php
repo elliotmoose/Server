@@ -7,25 +7,25 @@ $con = Database::BeginConnection();
 $username = filter_input(INPUT_POST, 'username');
 $password = filter_input(INPUT_POST,'password');
 
-$query = sprintf("SELECT  * FROM user_info WHERE User_Name = \"%s\" ",$username);
 
-if($result = mysqli_query($con,$query))
+
+$output = Database::StatementSelectWhere("*", "user_info", ["User_Name"], [$username], "s");
+
+if($output == null)
 {
-while($row = mysqli_fetch_assoc($result))
-{
-if($row['User_Password'] == $password)
-{
-    Output::SuccessWithArray($row);
+    Output::Fail("Invalid Username");
 }
 else
 {
-    Output::fail("Invalid Password");
+    $info = $output[0];
+
+    if ($info['User_Password'] == $password) {
+        Output::SuccessWithArray($info);
+    } else {
+        Output::Fail("Invalid Password");
+    }
+    
 }
-}
-}
-else
-{
-    Output::Fail("Invalid ID");
-}
+
 
 Database::EndConnection();

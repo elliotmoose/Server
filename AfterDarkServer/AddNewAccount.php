@@ -8,13 +8,16 @@ error_reporting(0);
 $con = Database::BeginConnection();
 $final = array();
 
-
+$firstname = filter_input(INPUT_POST, "firstname");
+$lastname = filter_input(INPUT_POST, "lastname");
 $username = filter_input(INPUT_POST, "username");
 $password = filter_input(INPUT_POST, "password");
 $email = filter_input(INPUT_POST, "email");
-$contact = filter_input(INPUT_POST, "contact");
+$contact = filter_input(INPUT_POST, "phone");
 $gender = filter_input(INPUT_POST, "gender");
-$birthday = filter_input(INPUT_POST, "birthday");
+$birthday = filter_input(INPUT_POST, "DOB");
+
+
 ////test
 //$username = "username";
 //$password = "pass";
@@ -22,7 +25,7 @@ $birthday = filter_input(INPUT_POST, "birthday");
 
 $username_ok = false;
 $email_ok = false;
-if($username == "" || $username == null || $password == "" || $password == null || $email == "" || $email == null)
+if($username == "" || $username == null || $email == "" || $email == null)
 {
     Output::Fail("Invalid Entry");
 }
@@ -46,11 +49,20 @@ if ($same_email_count['COUNT(*)']  > 0) {
 }
 
 if ($username_ok && $email_ok) {
+       
+    $values = [$firstname,$lastname,$username,$password,$email,$contact,$gender,$birthday];
     
+    foreach($values as $i)
+    {
+        if($i == "" || $i == null)
+        {
+            Output::Fail("empty field:");
+        }
+    }
+    
+ 
 
-    
-    $values = [$username,$password,$email];
-    $success = Database::Insert("user_info", "User_Name,User_Password,User_Email","sss", $values);
+    $success = Database::Insert("user_info", "User_Firstname,User_Lastname,User_Name,User_Password,User_Email,User_Contact,User_Gender,User_Birthday","ssssssss", $values);
     if($success)
     {
         $arrayAssoc = Database::SelectWhereColumn("*", "user_info", "User_Name", $username);
@@ -62,7 +74,7 @@ if ($username_ok && $email_ok) {
     }
     else
     {
-            Output::Fail("Fail to create account");
+         Output::Fail("Fail to create account");
     }
 
     

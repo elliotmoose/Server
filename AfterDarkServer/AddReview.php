@@ -73,9 +73,10 @@ $newBarService = ($barService*$totalReviewCount + $service)/($totalReviewCount+1
 $newBarAmbience = ($barAmbience*$totalReviewCount + $ambience)/($totalReviewCount+1);
 
 //step 4: update bar's new average
-$update_columns = array("Bar_Rating_Avg","Bar_Rating_Food","Bar_Rating_Price","Bar_Rating_Ambience","Bar_Rating_Service");
-$update_values = array($newBarAvg,$newBarFood,$newBarPrice,$newBarAmbience,$newBarService);
-$update_types = "sssss";
+$newCount = $totalReviewCount + 1;
+$update_columns = array("Bar_Rating_Avg","Bar_Rating_Food","Bar_Rating_Price","Bar_Rating_Ambience","Bar_Rating_Service","Bar_Rating_Count");
+$update_values = array($newBarAvg,$newBarFood,$newBarPrice,$newBarAmbience,$newBarService,$newCount);
+$update_types = "ssssss";
 $updateSuccess = Database::StatementUpdateWhere("bar_info", $update_columns, $update_values, $update_types,["Bar_ID"], [$Bar_ID], "s");
 
 //if($updateSuccess)

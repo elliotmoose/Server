@@ -57,13 +57,11 @@ class Database {
 
     public static function SelectWhereColumn(String $request, String $table, String $column_name, String $row_value) {
         $query = "SELECT $request FROM $table WHERE $column_name = ?";
-
         
         if (!$stmt = mysqli_prepare(self::$con, $query)) {
-            Output::Fail("failed to prepare statement");
+            Output::Fail("failed to prepare statement");           
         }
-
-
+        
         $stmt->bind_param("s", $row_value);
 
         $output = self::QueryStmtToArrayAssoc($stmt);

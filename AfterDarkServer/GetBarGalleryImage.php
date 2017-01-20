@@ -8,6 +8,8 @@ $bar_image_index = filter_input(INPUT_GET, "Image_Index");
 
 $imageSource = "../AfterDarkServer/Bar_Images/$bar_ID/$bar_image_index.jpg";
 
+//redirect to image source
+
 header("Location: ".$imageSource);
 
 Database::EndConnection();

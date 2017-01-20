@@ -5,11 +5,13 @@ require_once(__DIR__ . '/Database.php');
 $con = Database::BeginConnection();
 $bar_ID = filter_input(INPUT_GET, "Bar_ID");
 
-$sql = sprintf("SELECT COUNT(*) FROM images WHERE Bar_ID = %s",$bar_ID);
+$path = (__DIR__ ."/Bar_Images/$bar_ID/");
 
-$output = Database::FirstResultFromQuery($sql);
- 
-echo $output;
-
-
+$filecount = 0;
+$files = glob($path."*");
+if($files)
+{
+    $filecount = count($files);
+}
+echo $filecount;
 Database::EndConnection();

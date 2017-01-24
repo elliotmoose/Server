@@ -6,7 +6,7 @@ $con = Database::BeginConnection();
 
 $user_ID = filter_input(INPUT_POST,"User_ID");
 $user_name = filter_input(INPUT_POST,"User_Name");
-$bar_ID = filter_input(INPUT_POSTINPUT_POST,"Bar_ID");
+$bar_ID = filter_input(INPUT_POST,"Bar_ID");
 $amount = filter_input(INPUT_POST,"Amount");
 $discount_ID = filter_input(INPUT_POST, "Discount_ID");
 $merchant_ID = filter_input(INPUT_POST, "Merchant_ID");

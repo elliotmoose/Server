@@ -54,10 +54,9 @@ $success = Database::StatementInsertWhere("reviews",$set_columns, $set_values, $
 
 //also, update bar's average review
 //step 1: Get bar's reviews
-$barReviews = Database::SelectWhereColumn("Bar_Rating_Avg,Bar_Rating_Food,Bar_Rating_Price,Bar_Rating_Ambience,Bar_Rating_Service", "bar_info", "Bar_ID", $Bar_ID);
+$barReviews = Database::SelectWhereColumn("Bar_Rating_Avg,Bar_Rating_Food,Bar_Rating_Price,Bar_Rating_Ambience,Bar_Rating_Service,Bar_Rating_Count", "bar_info", "Bar_ID", $Bar_ID);
 //step 2: Get number of bar reviews given
 
-$totalReviewCountArr = Database::Count("reviews", "Bar_ID", $Bar_ID);
 //step 3: take current average * number + new review / total number
 $barAvg = $barReviews[0]['Bar_Rating_Avg'];
 $barPrice = $barReviews[0]['Bar_Rating_Price'];
@@ -65,7 +64,7 @@ $barFood = $barReviews[0]['Bar_Rating_Food'];
 $barService = $barReviews[0]['Bar_Rating_Service'];
 $barAmbience = $barReviews[0]['Bar_Rating_Ambience'];
 
-$totalReviewCount = $totalReviewCountArr['COUNT(*)'];
+$totalReviewCount = $barReviews[0]['Bar_Rating_Count'];
 $newBarAvg = ($barAvg*$totalReviewCount + $avg)/($totalReviewCount+1);
 $newBarPrice = ($barPrice*$totalReviewCount + $price)/($totalReviewCount+1);
 $newBarFood = ($barFood*$totalReviewCount + $food)/($totalReviewCount+1);

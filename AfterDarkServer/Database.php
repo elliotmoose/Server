@@ -245,6 +245,11 @@ class Database {
         
         $stmt = mysqli_prepare(self::$con, $query);
         
+        if(!$stmt)
+        {
+            Output::Fail('Failed to prepare statement');
+        }
+        
         $parameters = array();
 
         //first set types into array
@@ -261,12 +266,11 @@ class Database {
         foreach ($parameters as $key=>&$value) {
             $parameters[$key] = &$value;
         }
-        
         //bind parameters
         call_user_func_array(array($stmt,'bind_param'), $parameters);
 
         //run statement
-        if($stmt ->execute())
+        if($stmt -> execute())
         {
             //success
             return true;
@@ -274,6 +278,7 @@ class Database {
         }
         else
         {
+
             Output::Fail($stmt -> error);
             return false;
         }   

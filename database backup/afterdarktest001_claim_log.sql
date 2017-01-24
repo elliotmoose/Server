@@ -16,31 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `merchant_info`
+-- Table structure for table `claim_log`
 --
 
-DROP TABLE IF EXISTS `merchant_info`;
+DROP TABLE IF EXISTS `claim_log`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `merchant_info` (
-  `Merchant_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Username` varchar(45) DEFAULT NULL,
-  `Password` varchar(45) DEFAULT NULL,
-  `Bar_ID` int(11) DEFAULT NULL,
-  `Merchant_Email` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`Merchant_ID`),
-  UNIQUE KEY `Merchant_ID_UNIQUE` (`Merchant_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+CREATE TABLE `claim_log` (
+  `claim_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `User_ID` int(11) DEFAULT NULL,
+  `User_Name` varchar(45) DEFAULT NULL,
+  `Bar_ID` varchar(45) DEFAULT NULL,
+  `Discount_Description` text,
+  `Discount_Amount` varchar(45) DEFAULT NULL,
+  `Discount_Deal` varchar(45) DEFAULT NULL,
+  `CodeGeneratedDate` text,
+  PRIMARY KEY (`claim_ID`),
+  UNIQUE KEY `claim_ID_UNIQUE` (`claim_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `merchant_info`
+-- Dumping data for table `claim_log`
 --
 
-LOCK TABLES `merchant_info` WRITE;
-/*!40000 ALTER TABLE `merchant_info` DISABLE KEYS */;
-INSERT INTO `merchant_info` VALUES (1,'Merchant','S9728155f',1,'MErchant@merch.com'),(2,'mooselliot','S9728155f',0,'h@g.c');
-/*!40000 ALTER TABLE `merchant_info` ENABLE KEYS */;
+LOCK TABLES `claim_log` WRITE;
+/*!40000 ALTER TABLE `claim_log` DISABLE KEYS */;
+INSERT INTO `claim_log` VALUES (8,0,'mooselliot','0',NULL,'50','5%','1293'),(9,1,'rahul','1',NULL,'100','2%','1300'),(10,0,'mooselliot','0',NULL,'60','3%','1302'),(11,0,'mooselliot','0',NULL,'200','1 for 1','1308');
+/*!40000 ALTER TABLE `claim_log` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

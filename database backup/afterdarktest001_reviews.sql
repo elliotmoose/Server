@@ -37,7 +37,7 @@ CREATE TABLE `reviews` (
   `Bar_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`Review_ID`),
   UNIQUE KEY `Review_ID_UNIQUE` (`Review_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `reviews` (
 
 LOCK TABLES `reviews` WRITE;
 /*!40000 ALTER TABLE `reviews` DISABLE KEYS */;
-INSERT INTO `reviews` VALUES (0,0,'mooselliot','Great atmosphere','This bar has a great setting. nice place to chill at',4.25,4,5,3.5,4.5,NULL,0),(1,1,'rahul','Decent Food','The food at the bar is great! and at an affordable price',4,5,4,4,3,NULL,0),(2,0,'mooselliot','Bad service','food took very long to come. rude waitress',2.75,4,3,3,1,NULL,1),(3,1,'rahul','average','food was average. food took awhile to come. pricing was decent',3,3,3,3,3,NULL,1),(11,6,'llpofwy','','',3,3,3,3,3,NULL,0),(12,6,'llpofwy','','',4,4,3,5,4,NULL,1);
+INSERT INTO `reviews` VALUES (0,0,'mooselliot','Great atmosphere','This bar has a great setting. nice place to chill at',4.25,4,5,3.5,4.5,NULL,0),(1,1,'rahul','Decent Food','The food at the bar is great! and at an affordable price',4,5,4,4,3,NULL,0),(2,0,'mooselliot','Bad service','food took very long to come. rude waitress',2.75,4,3,3,1,NULL,1),(3,1,'rahul','average','food was average. food took awhile to come. pricing was decent',3,3,3,3,3,NULL,1),(19,1,'mooselliot','','',3,3,3,3,3,NULL,2),(20,1,'mooselliot','','',5,5,5,5,5,NULL,3);
 /*!40000 ALTER TABLE `reviews` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -59,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-16 23:34:20
+-- Dump completed on 2017-01-24 17:01:26

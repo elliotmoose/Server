@@ -4,14 +4,13 @@ require_once(__DIR__ . '/Database.php');
 $con = Database::BeginConnection();
 
 
-$user_ID = filter_input(INPUT_GET,"User_ID");
-$user_name = filter_input(INPUT_GET,"User_Name");
-$bar_ID = filter_input(INPUT_GET,"Bar_ID");
-$amount = filter_input(INPUT_GET,"Amount");
-$discount_ID = filter_input(INPUT_GET, "Discount_ID");
-$merchant_ID = filter_input(INPUT_GET, "Merchant_ID");
-$date = filter_input(INPUT_GET, "Date");
-
+$user_ID = filter_input(INPUT_POST,"User_ID");
+$user_name = filter_input(INPUT_POST,"User_Name");
+$bar_ID = filter_input(INPUT_POSTINPUT_POST,"Bar_ID");
+$amount = filter_input(INPUT_POST,"Amount");
+$discount_ID = filter_input(INPUT_POST, "Discount_ID");
+$merchant_ID = filter_input(INPUT_POST, "Merchant_ID");
+$date = filter_input(INPUT_POST, "Date");
 
 //check if inputs are complete
 if($user_ID == null || $user_ID == "" || $user_name == null || $user_name == "" || 

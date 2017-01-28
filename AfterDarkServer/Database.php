@@ -286,14 +286,12 @@ class Database {
         
     }
     
-    public static function StatementInsertWhere(String $table,array $set_columns,array $set_values,String $to_set_types)
-    {
-        
-
+    public static function StatementInsert(String $table,array $set_columns,array $set_values,String $to_set_types)
+    {        
         //check if number of values correspond to number of columns
         if(count($set_columns) != count($set_values))
         {
-            Output::Fail("statement select failed: number of columns and values (to set) do not match");
+            Output::Fail("statement insert failed: number of columns and values (to set) do not match");
         }
 
         if(strlen($to_set_types) != count($set_values))
@@ -342,6 +340,86 @@ class Database {
         
     }
     
+    public static function StatementInsertWhere(String $table,array $set_columns,array $set_values,String $to_set_types,array $condition_columns,array $condition_values,String $condition_types)
+    {
+        //check if number of values correspond to number of columns
+        if(count($set_columns) != count($set_values))
+        {
+            Output::Fail("statement insert failed: number of columns and values (to set) do not match");
+        }
+
+        if(strlen($to_set_types) != count($set_values))
+        {
+            Output::Fail("specified types do not tally with number of values");
+            
+        }
+        
+        if(count($condition_columns) != count($condition_values))
+        {
+            Output::Fail("statement insert failed: number of colums and values (to check) do not match");
+        }
+         
+        if(strlen($condition_types) != count($condition_values))
+        {
+            Output::Fail("specified types do not tally with number of values");
+            
+        }
+
+        $values_questionmarks = "";
+        for($i = 0; $i < count($set_values); $i++)
+        {
+            if($i != 0)
+            {
+                $values_questionmarks .= ",";
+            }
+            
+            $values_questionmarks .= "?";
+
+        }
+      
+        
+        $columns = implode(",", $set_columns);
+        
+         $conditions_pair_array = array();
+        for($i = 0; $i < count($condition_columns); $i++)
+        {
+            $column = $condition_columns[$i];
+            
+            $condition_key_value_pair = $column . " = ?";
+            
+            //adds key value pair to array
+            array_push($conditions_pair_array,$condition_key_value_pair);
+        }
+        
+        $conditions = implode(" AND ", $conditions_pair_array);
+        
+        //query        
+        $query = "INSERT INTO $table ($columns) VALUES ($values_questionmarks) WHERE $conditions";                            
+        
+        $all_parameters_types = $to_set_types . $condition_types;
+        
+        $all_parameter_values = array_merge($set_values,$condition_values);
+       
+        $parameters = array_merge(array($all_parameters_types),$all_parameter_values);
+                           
+        if(!($stmt = mysqli_prepare(self::$con,$query)))
+        {
+            Output::Fail("failed to prepare statement");
+        }
+        
+        //convert to reference
+        foreach ($parameters as $key=>&$value) {
+            $parameters[$key] = &$value;
+        }
+        
+        call_user_func_array(array($stmt,'bind_param'), $parameters);
+        
+        if($stmt -> execute())
+        {
+            return true;
+        }
+        
+    }
     
     public static function StatementUpdateWhere(String $table,array $set_columns,array $set_values,String $to_set_types,array $condition_columns,array $condition_values,String $condition_types)
     {

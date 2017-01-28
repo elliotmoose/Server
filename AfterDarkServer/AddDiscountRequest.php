@@ -12,6 +12,13 @@ $discount_ID = filter_input(INPUT_POST, "Discount_ID");
 $merchant_ID = filter_input(INPUT_POST, "Merchant_ID");
 $date = filter_input(INPUT_POST, "Date");
 
+$user_ID = "8";
+$user_name = "mooselliot";
+$bar_ID = "1";
+$amount = "100";
+$discount_ID = "0";
+$merchant_ID = "1";
+$date = "1";
 //check if inputs are complete
 if($user_ID == null || $user_ID == "" || $user_name == null || $user_name == "" || 
         $bar_ID == null || $bar_ID == "" || $amount == null || $amount == "" || 
@@ -68,12 +75,29 @@ else
     
 
 //insert claim into claim_logs
+$columns = ["User_ID","User_Name","Bar_ID","Discount_Amount","Discount_Deal","CodeGeneratedDate","Discount_Description"];
 $values = [$user_ID,$user_name,$bar_ID,$amount,$discountDeal,$date,$discountDescription];
-$success = Database::Insert("claim_log", "User_ID,User_Name,Bar_ID,Discount_Amount,Discount_Deal,CodeGeneratedDate,Discount_Description", "sssssss", $values);
+$success = Database::StatementInsert("claim_log", $columns, $values, "sssssss");
 
-if($success)
+//give points to user
+$ptsColumns = ["User_LoyaltyPts"];
+$ptsValues = [$amount];
+$ptsSuccess = Database::StatementUpdateWhere("user_info", $ptsColumns, $ptsValues, "s", ["User_ID"],[$user_ID], "s");
+if($success && $ptsSuccess)
 {
-    Output::Success("Discount Authentication Success");    
+    Output::Success("Discount Authenticated!" . "$amount" ." points added!");    
+}
+else
+{
+    if($success && !$ptsSuccess)
+    {
+            Output::Fail("User ID and Name do not match");        
+    }
+    else
+    {
+        
+            Output::Fail("Could not record this claim");
+    }
 }
 
 Database::EndConnection();

@@ -61,8 +61,9 @@ if ($username_ok && $email_ok) {
     }
     
  
-
-    $success = Database::Insert("user_info", "User_Firstname,User_Lastname,User_Name,User_Password,User_Email,User_Contact,User_Gender,User_Birthday","ssssssss", $values);
+    $columns = ["User_Firstname","User_Lastname","User_Name","User_Password","User_Email","User_Contact","User_Gender","User_Birthday"];
+    $success = Database::StatementInsert("user_info", $columns, $values, "ssssssss");
+    
     if($success)
     {
         $arrayAssoc = Database::SelectWhereColumn("*", "user_info", "User_Name", $username);

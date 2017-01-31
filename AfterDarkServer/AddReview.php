@@ -50,7 +50,7 @@ $set_columns = array("User_ID","User_Name","Review_Title","Review_Text","Rating_
 $set_values = array($User_ID,$username,$title,$body,$avg,$price,$ambience,$food,$service,$Bar_ID);
 $to_set_types = "ssssssssss";
 
-$success = Database::StatementInsertWhere("reviews",$set_columns, $set_values, $to_set_types);
+$success = Database::StatementInsert("reviews",$set_columns, $set_values, $to_set_types);
 
 //also, update bar's average review
 //step 1: Get bar's reviews

@@ -60,7 +60,7 @@ CREATE TABLE `bar_info` (
 
 LOCK TABLES `bar_info` WRITE;
 /*!40000 ALTER TABLE `bar_info` DISABLE KEYS */;
-INSERT INTO `bar_info` VALUES (0,'Elliot\'s Bar','this is the first bar',1.2956819292150505,103.78170626492638,'bar 1 address','Open Daily 6pm - 12am','6pm-1am','7pm-12am','8pm-12am','9pm-12am','10pm-12am','11pm-12am','12am-1am',2.24999,3.00001,3.00001,3.74999,3.00001,'6123 4567','www.bar1.com',1,'Modern,Contemp',3,'0',3),(1,'Rahul\'s Bar','This is Rahul\'s bar yo',1.3353980862595003,103.67920429226866,'rahul bar address',NULL,'6pm-12am','6am-11pm','closed','closed','closed','closed','closed',1,0.75,1,1.25,4,'61074914','www.bar2.com',0,'',4,'0',5),(2,'New Bar','Brand new opening',1.3333333333,103.333333333,'new address','open','1','2','3','4','5','6','7',3,3,3,3,3,'61111111','www.newBar.com',0,'new',2,'0',1),(3,'test','hi',0,0,NULL,NULL,'closed','closed','closed','closed','closed','closed','closed',4,4,4,4,4,NULL,NULL,0,NULL,0,'0',2);
+INSERT INTO `bar_info` VALUES (0,'Some Bar','we provide you with the BIGGEST discounts out there with the CHEAPEST food',1.2956819292150505,103.78170626492638,'bar 1 address','Open Daily 6pm - 12am','6pm-1am','7pm-12am','8pm-12am','9pm-12am','10pm-12am','11pm-12am','12am-1am',2.24999,3.00001,3.00001,3.74999,3.00001,'6123 4567','www.bar1.com',1,'Modern,Contemp',3,'0',3),(1,'Another Bar','This is some other cool bar with amazing discounts',1.3353980862595003,103.67920429226866,'rahul bar address',NULL,'6pm-12am','6am-11pm','closed','closed','closed','closed','closed',1,0.75,1,1.25,4,'61074914','www.bar2.com',0,'',4,'0',5),(2,'Random Bar','this is some random bar with great ambience and food',1.3334444444,103.4445556666666,'random bar address ',NULL,'closed','closed','closed','11pm-12am','closed','closed','12am-1am',3,3,3,3,3,'69994999',NULL,0,'Random,Explore',2,'0',0);
 /*!40000 ALTER TABLE `bar_info` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -73,4 +73,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-24 17:01:26
+-- Dump completed on 2017-01-31 22:23:35

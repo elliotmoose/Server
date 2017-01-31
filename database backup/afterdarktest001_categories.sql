@@ -40,7 +40,7 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` VALUES (1,'CRAFT BEERS','[1]','/Applications/MAMP/htdocs/AfterDarkServer/Category_Images/Craft Beers.jpg','savor the flavor','0'),(2,'GIRLS NIGHT OUT','[0]','/Applications/MAMP/htdocs/AfterDarkServer/Category_Images/Girls Night Out.jpg','','0'),(3,'PRE-DRINKS','[0,1]','/Applications/MAMP/htdocs/AfterDarkServer/Category_Images/Pre-Drinks.jpg','starting the night right','0'),(4,'CLASSY',' ','/Applications/MAMP/htdocs/AfterDarkServer/Category_Images/Classy.jpg','the perfect date night','0'),(6,'COSY','[2]','/Applications/MAMP/htdocs/AfterDarkServer/Category_Images/Cosy.jpg','the best chill out spots','0'),(7,'DATE',' ','/Applications/MAMP/htdocs/AfterDarkServer/Category_Images/Date.jpg','','0'),(10,'SPORTS','[0]','/Applications/MAMP/htdocs/AfterDarkServer/Category_Images/Sports.JPG','','0');
+INSERT INTO `categories` VALUES (1,'CRAFT BEERS','[1]','/Applications/MAMP/htdocs/AfterDarkServer/Category_Images/Craft Beers.jpg','savor the flavor','0'),(2,'GIRLS NIGHT OUT','[0]','/Applications/MAMP/htdocs/AfterDarkServer/Category_Images/Girls Night Out.jpg','','0'),(3,'PRE-DRINKS','[0,1]','/Applications/MAMP/htdocs/AfterDarkServer/Category_Images/Pre-Drinks.jpg','starting the night right','0'),(4,'CLASSY',' ','/Applications/MAMP/htdocs/AfterDarkServer/Category_Images/Classy.jpg','the perfect date night','0'),(6,'COSY','[2]','/Applications/MAMP/htdocs/AfterDarkServer/Category_Images/Cosy.jpg','the best chill out spots','0'),(7,'DATE',' ','/Applications/MAMP/htdocs/AfterDarkServer/Category_Images/Date.jpg','','0'),(10,'SPORTS','[0]','/Applications/MAMP/htdocs/AfterDarkServer/Category_Images/Sports.JPG','get your game on','0');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-24 17:01:27
+-- Dump completed on 2017-01-31 22:23:35

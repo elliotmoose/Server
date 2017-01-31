@@ -32,8 +32,9 @@ CREATE TABLE `user_info` (
   `User_Birthday` varchar(45) DEFAULT NULL,
   `User_Firstname` varchar(45) DEFAULT NULL,
   `User_Lastname` varchar(45) DEFAULT NULL,
+  `User_LoyaltyPts` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`User_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +43,7 @@ CREATE TABLE `user_info` (
 
 LOCK TABLES `user_info` WRITE;
 /*!40000 ALTER TABLE `user_info` DISABLE KEYS */;
-INSERT INTO `user_info` VALUES (1,'mooselliot','S9728155f','elliot_koh_1997@yahoo.com.sg',NULL,NULL,NULL,NULL,NULL),(6,'llpofwy','123456','e@g.c','90286294','Female','16/09/1997','Wanyi','Tan');
+INSERT INTO `user_info` VALUES (1,'mooselliot','S9728155f','elliot_koh_1997@yahoo.com.sg',NULL,NULL,NULL,NULL,NULL,100),(6,'llpofwy','123456','e@g.c','90286294','Female','16/09/1997','Wanyi','Tan',0),(8,'hello','hello','h@g.c','99999999','Male','01/01/2000','test','test',200);
 /*!40000 ALTER TABLE `user_info` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-24 17:01:26
+-- Dump completed on 2017-01-31 22:23:35

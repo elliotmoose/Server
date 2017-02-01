@@ -24,6 +24,9 @@ $Bar_OHFriday = filter_input(INPUT_GET, 'OH_Friday');
 $Bar_OHSaturday = filter_input(INPUT_GET, 'OH_Saturday');
 $Bar_OHSunday = filter_input(INPUT_GET, 'OH_Sunday');
 
+$Bar_Address = filter_input(INPUT_GET, 'Bar_Address');
+$Bar_Long = filter_input(INPUT_GET, 'Bar_Location_Longitude');
+$Bar_Lat = filter_input(INPUT_GET, 'Bar_Location_Latitude');
 
 if($Bar_ID == NULL)
 {
@@ -116,6 +119,21 @@ if($Bar_Owner_Name != null && $Bar_Owner_ID != null && $Bar_ID != null)
         {
             array_push($columns, "OH_Sunday");
             array_push($values, $Bar_OHSunday);
+        }
+        if($Bar_Address != NULL)
+        {
+            array_push($columns, "Bar_Address");
+            array_push($values, $Bar_Address);
+        }
+        if($Bar_Lat != NULL)
+        {
+            array_push($columns, "Bar_Location_Latitude");
+            array_push($values, $Bar_Lat);
+        }
+        if($Bar_Long != NULL)
+        {
+            array_push($columns, "Bar_Location_Longitude");
+            array_push($values, $Bar_Long);
         }
 
         

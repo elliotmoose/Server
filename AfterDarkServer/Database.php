@@ -487,7 +487,7 @@ class Database {
                 
         if(!($stmt = mysqli_prepare(self::$con,$query)))
         {
-            Output::Fail("failed to prepare statement");
+            Output::Fail("failed to prepare statement ");
         }
         
         //convert to reference

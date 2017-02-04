@@ -33,7 +33,10 @@ if($Bar_Owner_Name != null && $Bar_Owner_ID != null && $Bar_ID != null)
         
         if(count($discountExists) < 1)
         {
-            Output::Fail("discount $Discount_ID does not exist");
+            
+            $discounts = Database::SelectWhereColumn("*", "discounts", "Bar_ID", $Bar_ID);
+
+            Output::FailWithArray($discounts);
         }
         
         $columns = [];
@@ -68,7 +71,8 @@ if($Bar_Owner_Name != null && $Bar_Owner_ID != null && $Bar_ID != null)
 
         if($success)
         {
-            Output::Success("Bar Discounts Updated!");
+            $discounts = Database::SelectWhereColumn("*", "discounts", "Bar_ID", $Bar_ID);
+            Output::SuccessWithArray($discounts);
         }
         else
         {

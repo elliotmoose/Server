@@ -33,4 +33,14 @@ class Output
         die();
     }
     
+    public static function FailWithArray(array $others)
+    {
+        $output = array();
+        $output['success'] = "false";
+        $output['detail'] = $others;
+             
+        
+        echo json_encode($output);
+        die();
+    }
 }

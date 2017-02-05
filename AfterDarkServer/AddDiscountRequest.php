@@ -9,16 +9,48 @@ $user_name = filter_input(INPUT_POST,"User_Name");
 $bar_ID = filter_input(INPUT_POST,"Bar_ID");
 $amount = filter_input(INPUT_POST,"Amount");
 $discount_ID = filter_input(INPUT_POST, "Discount_ID");
-$merchant_ID = filter_input(INPUT_POST, "Merchant_ID");
 $date = filter_input(INPUT_POST, "Date");
 
-$user_ID = "8";
-$user_name = "mooselliot";
-$bar_ID = "1";
-$amount = "100";
-$discount_ID = "0";
-$merchant_ID = "1";
-$date = "1";
+$passCode = filter_input(INPUT_POST, "Passcode");
+//
+//$user_ID = "8";
+//$user_name = "mooselliot";
+//$bar_ID = "1";
+//$amount = "100";
+//$discount_ID = "0";
+//$merchant_ID = "1";
+//$date = "1";
+//
+//
+//passcode -> merch ID, merch BarID -> compare merchBarID and inputBarID
+
+
+//stage 1: use the passcode given to find merchant ID 
+if ($passCode == "")
+{
+    Output::Fail("Please enter passcode");    
+}
+
+//stage 1a: get merchant ID
+$merchantIDResult = Database::StatementSelectWhere("Merchant_ID,Bar_ID", "merchant_info", ["Passcode"], [$passCode], "s");
+
+$merchant_ID = $merchantIDResult[0]["Merchant_ID"];
+
+if($merchant_ID == null)
+{
+    Output::Fail("Passcode not recognized");    
+}
+
+//stage 2a: check bar ID from databse matches barID from post input        
+$merchantBarID = $merchantIDResult[0]["Bar_ID"];
+
+if($Bar_ID != $merchantBarID)
+{    
+   Output::Fail(" Passcode not recognized");
+}
+    
+
+
 //check if inputs are complete
 if($user_ID == null || $user_ID == "" || $user_name == null || $user_name == "" || 
         $bar_ID == null || $bar_ID == "" || $amount == null || $amount == "" || 
@@ -26,21 +58,6 @@ if($user_ID == null || $user_ID == "" || $user_name == null || $user_name == "" 
         $date == null || $date == 0 || $date == "")
 {
     Output::Fail("Incomplete Input");    
-}
-
-//check if merchant ID matches bar ID
-$merchantInfoArr = Database::SelectWhereColumn("*", "merchant_info", "Bar_ID", $bar_ID);
-
-if(count($merchantInfoArr) == 0)
-{
-    Output::Fail("Invalid Merchant Account; Please log in again");    
-}
-
-$merchantBarID = $merchantInfoArr[0]["Bar_ID"];
-
-if($merchantBarID != $bar_ID)
-{
-    Output::Fail("Merchant account invalid");
 }
 
 //get info about this discount

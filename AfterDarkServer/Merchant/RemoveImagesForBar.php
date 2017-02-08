@@ -4,7 +4,6 @@ require_once ("../Database.php");
 require_once ("../Output.php");
 
 $merchant_ID = filter_input(INPUT_POST, "Merchant_ID");
-$merchant_ID = "0";
 if($merchant_ID == null)
 {
     Output::Fail("no merchant ID");    

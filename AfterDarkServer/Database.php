@@ -505,7 +505,65 @@ class Database {
         
     }
     
-    
+    public static function DeleteRowsWhere(String $table,array $columns,array $values,String $types)
+    {
+        //check if number of values correspond to number of columns
+        if(count($columns) != count($values))
+        {
+            Output::Fail("statement select failed: number of colums and values do not match");
+        }
+        
+        if(strlen($types) != count($values))
+        {
+            Output::Fail("specified types do not tally with number of values");
+        }
+        
+        //create column questionmark pair
+        $condition = "";
+        
+        for($i = 0; $i < count($columns); $i++)
+        {
+            $column = $columns[$i];
+            
+            if($i != 0)
+            {
+                $condition .= " AND ";     
+            }
+            
+            $condition .= $column;
+            $condition .= " = ?";
+
+        }
+        
+        if($condition == "")
+        {
+            return null;
+        }
+        
+        $parameters = array_merge(array($types), $values);
+        
+        $query = "DELETE FROM $table WHERE $condition";
+
+        if(!($stmt = mysqli_prepare(self::$con,$query)))
+        {
+            Output::Fail("failed to prepare statement");
+        }
+        
+        //convert to reference
+        foreach ($parameters as $key=>&$value) {
+            $parameters[$key] = &$value;
+        }
+        
+        call_user_func_array(array($stmt,'bind_param'), $parameters);
+        
+        if($stmt -> execute())
+        {
+            return true;
+        }
+        
+        return false;
+        
+    }
     //non associative
     public static function FirstResultFromQuery(String $query) {
         if ($result = mysqli_query(self::$con, $query)) 

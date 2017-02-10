@@ -33,7 +33,7 @@ CREATE TABLE `claim_log` (
   `CodeGeneratedDate` text,
   PRIMARY KEY (`claim_ID`),
   UNIQUE KEY `claim_ID_UNIQUE` (`claim_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,6 +42,7 @@ CREATE TABLE `claim_log` (
 
 LOCK TABLES `claim_log` WRITE;
 /*!40000 ALTER TABLE `claim_log` DISABLE KEYS */;
+INSERT INTO `claim_log` VALUES (21,10,'jj94','1','Receive 20% discount at any AfterDark registered Bar!','30.00','20%','1486332548.12697'),(22,1,'mooselliot','0','Receive 5% discount with main course','14.20','5%','1486538286.81651');
 /*!40000 ALTER TABLE `claim_log` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-05 23:24:26
+-- Dump completed on 2017-02-10 13:03:58

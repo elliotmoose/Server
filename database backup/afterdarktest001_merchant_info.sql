@@ -41,7 +41,7 @@ CREATE TABLE `merchant_info` (
 
 LOCK TABLES `merchant_info` WRITE;
 /*!40000 ALTER TABLE `merchant_info` DISABLE KEYS */;
-INSERT INTO `merchant_info` VALUES (1,'Merchant','S9728155f',1,'MErchant@merch.com','1324'),(2,'mooselliot','S9728155f',0,'h@g.c','4333');
+INSERT INTO `merchant_info` VALUES (1,'AppleDemoAccount','Apple123',1,'MErchant@merch.com','1324'),(2,'mooselliot','S9728155f',0,'h@g.c','4333');
 /*!40000 ALTER TABLE `merchant_info` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-05 23:24:26
+-- Dump completed on 2017-02-10 13:03:58

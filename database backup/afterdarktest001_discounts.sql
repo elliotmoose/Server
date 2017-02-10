@@ -30,7 +30,7 @@ CREATE TABLE `discounts` (
   `discount_amount` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`discount_ID`),
   UNIQUE KEY `discount_ID_UNIQUE` (`discount_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `discounts` (
 
 LOCK TABLES `discounts` WRITE;
 /*!40000 ALTER TABLE `discounts` DISABLE KEYS */;
-INSERT INTO `discounts` VALUES (0,'Aftedark Classics','Receive 20% discount at any AfterDark registered Bar!',1,'20%'),(1,'Bar 1 specials','Receive 5% discount with main course',0,'5%');
+INSERT INTO `discounts` VALUES (1,'Bar 1 specials','Receive 5% discount with main course',0,'5%'),(25,'AfterDark classic','Discount description',1,'10%');
 /*!40000 ALTER TABLE `discounts` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-05 23:24:26
+-- Dump completed on 2017-02-10 13:03:58

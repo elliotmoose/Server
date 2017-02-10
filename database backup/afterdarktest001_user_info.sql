@@ -34,7 +34,7 @@ CREATE TABLE `user_info` (
   `User_Lastname` varchar(45) DEFAULT NULL,
   `User_LoyaltyPts` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`User_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `user_info` (
 
 LOCK TABLES `user_info` WRITE;
 /*!40000 ALTER TABLE `user_info` DISABLE KEYS */;
-INSERT INTO `user_info` VALUES (1,'mooselliot','S9728155f','elliot_koh_1997@yahoo.com.sg',NULL,NULL,NULL,NULL,NULL,100),(6,'llpofwy','123456','e@g.c','90286294','Female','16/09/1997','Wanyi','Tan',0),(8,'hello','hello','h@g.c','99999999','Male','01/01/2000','test','test',200),(9,'AppleDemoAccount','Apple123','apple@apple.com','90000000','Male','01/01/1990','Apple','Inc',100),(10,'jj94','speedkillz','justinsurin@gmail.com','94654261','Male','25/05/1994','justin','surin',0),(11,'jprabha','ICZ3V4','jprabhag@yahoo.com','97546485','Male','01/01/1990','J','P',0),(12,'Rahul','PogoPogo1997','rahul.jprabha@yahoo.com.sg','91514447','Male','28/08/1997','Rahul','Jayaprabha',0),(13,'Jprabha1','care4aft','jprabha1@yahoo.com','97546485','Male','01/01/1990','Jaya','p',0),(14,'lukiluki','sass11','andreas@lukin.ee','0928324309','Male','02/02/1970','andreas','lukin',0);
+INSERT INTO `user_info` VALUES (1,'mooselliot','S9728155f','elliot_koh_1997@yahoo.com.sg',NULL,NULL,NULL,NULL,NULL,14),(6,'llpofwy','123456','e@g.c','90286294','Female','16/09/1997','Wanyi','Tan',0),(8,'hello','hello','h@g.c','99999999','Male','01/01/2000','test','test',200),(9,'AppleDemoAccount','Apple123','apple@apple.com','90000000','Male','01/01/1990','Apple','Inc',0),(10,'jj94','VWnEKu','justinsurin@gmail.com','94654261','Male','25/05/1994','justin','surin',30),(11,'jprabha','ICZ3V4','jprabhag@yahoo.com','97546485','Male','01/01/1990','J','P',0),(12,'Rahul','PogoPogo1997','rahul.jprabha@yahoo.com.sg','91514447','Male','28/08/1997','Rahul','Jayaprabha',0),(13,'Jprabha1','care4aft','jprabha1@yahoo.com','97546485','Male','01/01/1990','Jaya','p',0),(14,'lukiluki','sass11','andreas@lukin.ee','0928324309','Male','02/02/1970','andreas','lukin',0),(15,'vivientsk','Sillyfamily315','vivientsk@hotmail.com','60173710214','Female','15/03/1997','Vivien','Tan',0),(16,'SS Rajan','yashna1607','ssrajan40@gmail.com','92382040','Male','04/02/1982','SS','Rajan',0),(17,'pehzhenhua','14101990','Lucas.pzh@gmail.com','86685299','Male','22/02/1989','Peh','zhen hua',0),(18,'Sheila','C0tt0nw00d','sheiladeeisme@gmail.com','6029033556','Female','24/02/1969','Sheila','Dee',0),(19,'vi.llian','walao1996','pinaa1004@gmail.com','91329161','Female','04/10/1996','vina','Liliani',0);
 /*!40000 ALTER TABLE `user_info` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-05 23:24:25
+-- Dump completed on 2017-02-10 13:03:58

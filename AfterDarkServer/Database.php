@@ -9,7 +9,7 @@ class Database {
     const database_IP = "127.0.0.1";
     const database_Name = "afterdarktest001";
     const username = "root";
-    const password = "root";
+    const password = "S9728155f";
 
     static $con;
 

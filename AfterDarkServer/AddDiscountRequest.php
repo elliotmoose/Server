@@ -97,8 +97,12 @@ $values = [$user_ID,$user_name,$bar_ID,$amount,$discountDeal,$date,$discountDesc
 $success = Database::StatementInsert("claim_log", $columns, $values, "sssssss");
 
 //give points to user
+//get users initial points 
+$ptResultArray = Database::StatementSelectWhere("User_LoyaltyPts", "user_info", ["User_ID"], [$user_ID], "s");
+$oldLoyaltyPts = $ptResultArray[0]["User_LoyaltyPts"];
 $ptsColumns = ["User_LoyaltyPts"];
-$ptsValues = [$amount];
+$newLoyaltyPtsAmount = $amount + $oldLoyaltyPts;
+$ptsValues = [$newLoyaltyPtsAmount];
 $ptsSuccess = Database::StatementUpdateWhere("user_info", $ptsColumns, $ptsValues, "s", ["User_ID"],[$user_ID], "s");
 if($success && $ptsSuccess)
 {

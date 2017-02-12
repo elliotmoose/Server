@@ -1,8 +1,9 @@
 <?php
 require_once '../PHPMailer/PHPMailerAutoload.php';
 require_once (__DIR__ . '/Output.php');
-
-function SendMail(String $receipient, String $subject, String $body)
+class Mail
+{
+public static function SendMail(String $receipient, String $subject, String $body)
 {
 $mail = new PHPMailer(true);
 try{
@@ -10,7 +11,7 @@ $mail -> IsSMTP();
 $mail->Host = 'smtp.gmail.com';
 $mail->Port = 587;
 $mail->SMTPAuth = true;
-$mail->Username = 	'afterdarkbars@gmail.com';
+$mail->Username = 'afterdarkbars@gmail.com';
 $mail->Password = 'Rahultheman97';
 $mail->SMTPSecure = 'tls';
 $mail->From = "afterdarkbars@gmail.com";
@@ -23,16 +24,17 @@ $mail->Body = $body;
 
 if(!$mail->Send())
 {
-	return true;
+	return false;
 }
 else
-{
-	return false;
+{	
+	return true;
 }
 }
 catch(phpmailerException $e)
 {
+
     Output::Fail($e->errorMessage());
-    return false;
+}
 }
 }

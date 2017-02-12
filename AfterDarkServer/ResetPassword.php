@@ -10,6 +10,9 @@ $user_email_input = filter_input(INPUT_POST, "User_Email");
 $user_name = filter_input(INPUT_POST, "User_Name");
 $newPassword = random_str(6);
 
+//$user_name = "mooselliot";
+//$user_email_input = "elliot_koh_1997@yahoo.com.sg";
+
 if($user_name == null || $user_email_input == null)
 { 
     Output::Fail("Incomplete input");
@@ -40,7 +43,8 @@ $subject  = 'AfterDark Password Recovery';
 $message  = "Hello! Your account's password has been reset to $newPassword. Please change your password in the settings page";
 
 
-if(Mail::SendMail($to,$subject,$message))
+$mailSent = Mail::SendMail($to,$subject,$message);
+if($mailSent)
 {
     Output::Success("The Email has been sent!");
 }

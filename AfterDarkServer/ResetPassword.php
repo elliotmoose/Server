@@ -2,6 +2,7 @@
 
 require_once(__DIR__ . '/Database.php');
 require_once(__DIR__ . '/Output.php');
+require_once(__DIR__ . '/Mail.php');
 
 Database::BeginConnection();
 
@@ -37,11 +38,9 @@ Database::EndConnection();
 $to       = $user_email_retrieved;
 $subject  = 'AfterDark Password Recovery';
 $message  = "Hello! Your account's password has been reset to $newPassword. Please change your password in the settings page";
-$headers  = 'From: AfterDark@gmail.com' . "\r\n" .
-            'MIME-Version: 1.0' . "\r\n" .
-            'Content-type: text/html; charset=utf-8';
 
-if(mail($to, $subject, $message, $headers))
+
+if(Mail::SendMail($to,$subject,$message))
 {
     Output::Success("The Email has been sent!");
 }

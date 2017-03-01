@@ -14,6 +14,7 @@ $output = Database::Select($request, "bar_info");
 $finalOut = array();
 foreach ($output as $bar) {
     
+    $bar_ID = $bar["Bar_ID"];
     //add number of images
     $path = (__DIR__ . "/Bar_Images/$bar_ID/");
     $filecount = 0;

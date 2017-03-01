@@ -11,7 +11,24 @@ $request = "Bar_Name,Bar_ID,Bar_Rating_Price,Bar_Rating_Ambience,Bar_Rating_Pric
 
 $output = Database::Select($request, "bar_info");
 
-echo json_encode($output);
+$finalOut = array();
+foreach ($output as $bar) {
+    
+    //add number of images
+    $path = (__DIR__ . "/Bar_Images/$bar_ID/");
+    $filecount = 0;
+    $files = glob($path . "*");
+
+    if ($files) {
+        $filecount = count($files);        
+    }
+    
+    $bar['maxImageCount'] = $filecount;
+    
+    array_push($finalOut,$bar);    
+}
+
+echo json_encode($finalOut);
 
 Database::EndConnection();
         

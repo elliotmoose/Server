@@ -1,0 +1,43 @@
+body{
+	margin: 0;
+	overflow: hidden;
+}
+
+#container
+{
+
+}
+
+#navBar
+{
+	background-color: grey;
+	width: 100vw;
+}
+
+#navBar > ul
+{
+	list-style: none;	
+}
+
+#navBar > ul > li{
+	min-width: 60px;
+	max-width: 100px;
+	text-align: center;
+	background-color: yellow;
+
+}
+
+#navBar a
+{
+	text-decoration: none;
+	margin:0;
+	padding:50px;
+}
+
+.button
+{
+	
+}
+
+
+

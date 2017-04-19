@@ -31,9 +31,6 @@ class Files
         return $outputArray;
     }
     
-    public static function DirExists($dir,$name)
-    {
-        return file_exists($dir . $name);
-    }
+    
 
 }

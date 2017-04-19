@@ -8,9 +8,9 @@ require_once('./Reusable/Files.php');
 $owner_ID = filter_input(INPUT_POST, "owner_ID");
 $group_name = filter_input(INPUT_POST, "group_name");
 
-//test
-$owner_ID = "1";
-$group_name = "Ms ang's bio class";
+////test
+//$owner_ID = "1";
+//$group_name = "Ms ang's bio class";
 if($owner_ID == null){Output::Fail("empty ID");}
 if($group_name == null){Output::Fail("empty name");}
 

@@ -10,6 +10,7 @@ require_once('./Reusable/Files.php');
 $userID = filter_input(INPUT_POST, "user_ID");
 
 $userID = 1;
+
 if($userID == null){Output::Fail("no ID");}
 Database::BeginConnection();
 $output = Database::SelectWhereColumn("subscriptions", "user_info", "user_ID", $userID);
@@ -24,6 +25,33 @@ $outputArray = [];
 //get group information
 foreach($subscriptionsArray as $subscriptionID)
 {
+
+    //check if subscription ID exists
+    if(!is_dir('../Groups/' . $subscriptionID))
+    {
+        //remove this subscription ID from database
+        
+        //step 1: get IDs        
+        $subIDsOutput = Database::SelectWhereColumn("subscriptions", "user_info", "user_ID", $userID);
+
+        //step 2: remove from array
+        $subIDsArray = json_decode($subIDsOutput[0]["subscriptions"]);
+        if(($key = array_search($subscriptionID, $subIDsArray)))
+        {
+            unset($subIDsArray[$key]);
+        }
+        
+        //step 3: update database with new list
+        
+        if (!Database::StatementUpdateWhere("user_info", ["subscriptions"], [json_encode($subIDsArray)], "s", ["user_ID"], [$userID], "s")) {
+            Output::Fail("failed to update database");
+        }
+
+
+        //skip this iteration
+        continue;
+    }
+    
     //find respective folder and info.txt 
     $dir = '../Groups/' . $subscriptionID .'/info.txt';
     $fileInfo = Files::ReadJSONFile($dir);

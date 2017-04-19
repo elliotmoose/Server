@@ -1,42 +1,102 @@
 body{
 	margin: 0;
-	overflow: hidden;
+	background-color: black;
 }
 
 #container
 {
-
+	overflow-y:hidden;
+	overflow-x: auto;
 }
 
 #navBar
 {
-	background-color: grey;
+	position: fixed;
+	background-color: white;
 	width: 100vw;
+	height: 40px;
+
+    box-shadow: 0px 2px 5px black;
 }
 
 #navBar > ul
 {
 	list-style: none;	
+	padding: 0;
+	margin: 0;
+
 }
 
 #navBar > ul > li{
+	display:inline-block;
+	float:left;
 	min-width: 60px;
 	max-width: 100px;
 	text-align: center;
-	background-color: yellow;
+	height:100%;
+	//background-color: yellow;
 
 }
 
 #navBar a
 {
-	text-decoration: none;
+	display:inline-block;
+	position: relative;
+	line-height: 40px;
 	margin:0;
-	padding:50px;
+	padding: 0px 10px 0px 10px;	
+	height: 100%;
+
+
+	transition-duration: 0.2s;
+	transition-timing-function: ease-in;
+
+	font-family: Ailerons;
+	font-size: 16px;
+	text-decoration: none;
+	color: black;
+	background-color: white;
 }
 
-.button
+#navBar a:hover
+{
+	background-color: lightgrey;
+	transform: translateZ(10px);
+}
+
+#HomeImage
+{
+	width: 100vw;
+	height:calc(100vh - 40px);
+	opacity: 0.3;
+}
+
+#content-body
+{
+	margin-top: 40px;
+/*
+	display: block;
+	margin-left: 500px;
+	width: 50vw;
+	height: 2000px;
+	background-color:purple;
+	z-index: -2;*/
+}
+
+.whitebox
 {
 	
+	margin: 10px;
+	float: left;
+	width: 100px;
+	height:100px;
+	background-color: white;
+}
+@font-face
+{
+    font-family: Ailerons;
+    src: url('/Fonts/Ailerons-Typeface.otf');
+    
 }
 
 

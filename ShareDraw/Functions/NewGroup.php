@@ -34,7 +34,7 @@ if(!mkdir($dir.$groupID))
 if(!$infoTxt = fopen($dir . $groupID . '/info.txt', 'w+'))
 {
     //remove group
-    RemoveGroup(); 
+    RemoveGroup($dir.$groupID); 
     Output::Fail("failed to initialize group");
 }
 
@@ -50,7 +50,7 @@ fclose($infoTxt);
 if(!$userIDsTxt = fopen($dir . $groupID . '/userIDs.txt', 'w+'))
 {
     //remove group
-    RemoveGroup(); 
+    RemoveGroup($dir.$groupID); 
     Output::Fail("failed to initialize group");
 }
 
@@ -58,13 +58,14 @@ fwrite($userIDsTxt,'['. $owner_ID .']');
 fclose($userIDsTxt);
 
 //step 6: add userID into owners subscribed database
-//step 6a: get users subcribed
+//step 6a: get users subcribed array
 $databaseSubscriptionOutput = Database::SelectWhereColumn("subscriptions", "user_info", "user_ID", $owner_ID);
 $subscriptions = json_decode($databaseSubscriptionOutput[0]["subscriptions"]);
 array_push($subscriptions,$groupID);
+//step 6b: update database
 if(!Database::StatementUpdateWhere("user_info", ["subscriptions"], [json_encode($subscriptions)], "s", ["user_ID"], [$owner_ID], "s"))
 {
-    RemoveGroup();    
+    RemoveGroup($dir.$groupID);    
     Output::Fail("failed to update database");    
 }
 
@@ -81,8 +82,8 @@ function GenerateRandomAlphanumericString(int $length)
     return $output;
 }
 
-function RemoveGroup()
+function RemoveGroup($dir)
 {
-    if(!rmdir($dir.$groupID)){Output::Fail("fatal error: directory removal fail");}
+    if(!rmdir($dir)){Output::Fail("fatal error: directory removal fail");}
 }
   

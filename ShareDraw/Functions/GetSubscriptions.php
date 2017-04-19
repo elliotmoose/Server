@@ -9,8 +9,6 @@ require_once('./Reusable/Files.php');
 //get subscription group IDs, names and owner (should be within info.txt of files)
 $userID = filter_input(INPUT_POST, "user_ID");
 
-$userID = 1;
-
 if($userID == null){Output::Fail("no ID");}
 Database::BeginConnection();
 $output = Database::SelectWhereColumn("subscriptions", "user_info", "user_ID", $userID);
@@ -36,14 +34,16 @@ foreach($subscriptionsArray as $subscriptionID)
 
         //step 2: remove from array
         $subIDsArray = json_decode($subIDsOutput[0]["subscriptions"]);
-        if(($key = array_search($subscriptionID, $subIDsArray)))
-        {
+        
+        $key = array_search($subscriptionID, $subIDsArray);        
+        if($key!==false){            
             unset($subIDsArray[$key]);
         }
-        
+
         //step 3: update database with new list
         
-        if (!Database::StatementUpdateWhere("user_info", ["subscriptions"], [json_encode($subIDsArray)], "s", ["user_ID"], [$userID], "s")) {
+        if (!Database::StatementUpdateWhere("user_info", ["subscriptions"], [json_encode($subIDsArray)], "s", ["user_ID"], [$userID], "s")) {            
+            Database::EndConnection();
             Output::Fail("failed to update database");
         }
 

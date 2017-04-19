@@ -12,6 +12,7 @@ $description = filter_input(INPUT_POST, "description");
 
 if($owner_ID == null){Output::Fail("empty ID");}
 if($group_name == null){Output::Fail("empty name");}
+if($description == null){Output::Fail("empty description");}
 
 //step 1: generate random group ID
 $groupID = GenerateRandomAlphanumericString(6);

@@ -19,6 +19,7 @@ $fileName = '../Groups/' . $group_ID . '/userIDs.txt';
 $userIDsArray = Files::ReadJSONFile($fileName);
 foreach ($userIDsArray as $userSubbedID) {
     if ($userSubbedID == $user_ID) {
+        Database::EndConnection();
         Output::Fail("You have already subscribed to this group!!");
     }
 }
@@ -35,6 +36,7 @@ $subscriptions = json_decode($databaseSubscriptionOutput[0]["subscriptions"]);
 //step 2b: check if subscription already exists
 foreach ($subscriptions as $subscription) {
     if ($subscription == $group_ID) {
+        Database::EndConnection();
         Output::Fail("You have already subscribed to this group!!");
     }
 }
@@ -42,10 +44,13 @@ foreach ($subscriptions as $subscription) {
 array_push($subscriptions, $group_ID);
 
 if (!Database::StatementUpdateWhere("user_info", ["subscriptions"], [json_encode($subscriptions)], "s", ["user_ID"], [$user_ID], "s")) {
+    
+    Database::EndConnection();
     Output::Fail("failed to update database");
 }
 else
 {
+    Database::EndConnection();
     Output::Success("Subscribed!");
 }
 

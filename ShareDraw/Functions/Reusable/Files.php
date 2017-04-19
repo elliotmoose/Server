@@ -12,7 +12,7 @@ class Files
         }
         else
         {
-            Output::Fail("Group does not exist");
+            Output::Fail("Group or File does not exist");
         }
     }
     public static function OverrideFile(string $dir, string $contents)
@@ -23,7 +23,7 @@ class Files
         }
         else
         {
-            Output::Fail("Group does not exist");
+            Output::Fail("Group or File does not exist");
         }
     }
     public static function GetAllDirNames(String $dir)
@@ -41,6 +41,34 @@ class Files
         return $outputArray;
     }
     
+    function rrmdir($src)
+{
+    $dir = opendir($src);
+    while(false!== ($file = readdir($dir)))
+    {
+        if(($file != '.') && ($file != '..'))
+        {
+            $full = $src . '/' . $file;
+            if(is_dir($full))
+            {
+                rrmdir($full);
+            }
+            else
+            {
+                unlink($full);
+            }
+        }
+    }
     
+    closedir($dir);
+    if(rmdir($src))
+    {
+        return true;        
+    }
+    else
+    {
+        return false;
+    }
+}
 
 }

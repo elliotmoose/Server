@@ -7,7 +7,7 @@ require_once('./Reusable/Files.php');
 
 $owner_ID = filter_input(INPUT_POST, "owner_ID");
 $group_name = filter_input(INPUT_POST, "group_name");
-
+$description = filter_input(INPUT_POST, "description");
 ////test
 //$owner_ID = "1";
 //$group_name = "Ms ang's bio class";
@@ -43,7 +43,7 @@ Database::BeginConnection();
 $databaseOutputArray = Database::SelectWhereColumn("user_name", "user_info", "user_ID", $owner_ID);
 $username = $databaseOutputArray[0]["user_name"];
 
-fwrite($infoTxt, '{"name":"'. $group_name .'","owner_name": "'.$username.'","owner_ID" :"'.$owner_ID.'","group_ID":"' . $owner_ID . '"}');
+fwrite($infoTxt, '{"name":"'. addslashes($group_name) .'","owner_name": "'. addslashes($username).'","description": "'. addslashes($description).'","owner_ID" :"'. $owner_ID.'","group_ID":"' . $groupID . '"}');
 fclose($infoTxt);
 
 //step 5: mk userIDs (and add in ownerID)
@@ -54,7 +54,7 @@ if(!$userIDsTxt = fopen($dir . $groupID . '/userIDs.txt', 'w+'))
     Output::Fail("failed to initialize group");
 }
 
-fwrite($userIDsTxt,'['. $owner_ID .']');
+fwrite($userIDsTxt,'["'. $owner_ID .'"]');
 fclose($userIDsTxt);
 
 //step 6: add userID into owners subscribed database
@@ -68,6 +68,8 @@ if(!Database::StatementUpdateWhere("user_info", ["subscriptions"], [json_encode(
     RemoveGroup($dir.$groupID);    
     Output::Fail("failed to update database");    
 }
+
+Output::Success("new group created");
 
 function GenerateRandomAlphanumericString(int $length)
 {

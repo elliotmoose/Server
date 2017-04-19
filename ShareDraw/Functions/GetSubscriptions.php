@@ -9,8 +9,8 @@ require_once('./Reusable/Files.php');
 //get subscription group IDs, names and owner (should be within info.txt of files)
 $userID = filter_input(INPUT_POST, "user_ID");
 
-//$userID = 2;
-
+$userID = 1;
+if($userID == null){Output::Fail("no ID");}
 Database::BeginConnection();
 $output = Database::SelectWhereColumn("subscriptions", "user_info", "user_ID", $userID);
 

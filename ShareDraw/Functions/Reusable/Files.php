@@ -12,7 +12,7 @@ class Files
         }
         else
         {
-            Output::Fail("Group or File does not exist");
+            Output::Fail("Group or File does not exist: $dir");
         }
     }
     public static function OverrideFile(string $dir, string $contents)
@@ -23,7 +23,7 @@ class Files
         }
         else
         {
-            Output::Fail("Group or File does not exist");
+            Output::Fail("Group or File does not exist: $dir");
         }
     }
     public static function GetAllDirNames(String $dir)

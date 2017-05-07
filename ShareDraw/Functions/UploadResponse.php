@@ -10,6 +10,7 @@ require_once('./Reusable/Files.php');
 $user_ID = filter_input(INPUT_POST, "user_ID");
 $group_ID = filter_input(INPUT_POST, "group_ID");
 $assignment_ID = filter_input(INPUT_POST, "assignment_ID");
+$commentInfo = filter_input(INPUT_POST, "commentInfo");
 
 $images = $_FILES;
 
@@ -41,6 +42,21 @@ if(is_dir("$assignmentFolder/$user_ID") === false)
 //        unlink($file); // delete file
 //    }
 //}
+
+//save comments into a txt file
+$dir = "../Groups/$group_ID/$assignment_ID/$user_ID/comments.txt";
+if(!$commentInfoTxt = fopen($dir, 'w+'))
+{
+    //remove group
+    Output::Fail("failed to initialize info txt");
+}
+else
+{
+    fwrite($commentInfoTxt, $commentInfo);
+    fclose($commentInfoTxt);
+}
+
+
 
 foreach ($images as $name => $image) {
     $destinationFile = "../Groups/$group_ID/$assignment_ID/$user_ID/$user_ID" . "_response.png";

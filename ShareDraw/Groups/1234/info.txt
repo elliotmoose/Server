@@ -1,2 +1,0 @@
-{"name":"random group name","owner_name": "Elliot","owner_ID": "2","group_ID": "1234"}
-

@@ -33,7 +33,7 @@ foreach($subscriptionsArray as $subscriptionID)
         $subIDsOutput = Database::SelectWhereColumn("subscriptions", "user_info", "user_ID", $userID);
 
         //step 2: remove from array
-        $subIDsArray = json_decode($subIDsOutput[0]["subscriptions"]);
+        $subIDsArray = json_decode($subIDsOutput[0]["subscriptions"],true);
         
         $key = array_search($subscriptionID, $subIDsArray);        
         if($key!==false){            

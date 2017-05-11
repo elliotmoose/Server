@@ -10,6 +10,7 @@ $sql = sprintf("SELECT Bar_Description,Bar_Location_Latitude,Bar_Location_Longit
 
 $output = Database::QueryStringToArrayAssoc($sql);
 
+
 echo json_encode($output);
 
 Database::EndConnection();		

@@ -1,7 +1,8 @@
 <?php
 
-require_once(__DIR__ . '/Database.php');
-require_once(__DIR__ . '/Output.php');
+require_once('./Reusable/Database.php');
+require_once('./Reusable/Output.php');
+require_once('./Reusable/Mail.php');
 
 Database::BeginConnection();
 
@@ -9,10 +10,14 @@ $user_email_input = filter_input(INPUT_POST, "User_Email");
 $user_name = filter_input(INPUT_POST, "User_Name");
 $newPassword = random_str(6);
 
+//$user_name = "mooselliot";
+//$user_email_input = "elliot_koh_1997@yahoo.com.sg";
+
 if($user_name == null || $user_email_input == null)
 { 
     Output::Fail("Incomplete input");
 }
+
 //get user info from user name
 $userInfoRetrive = Database::SelectWhereColumn("*", "user_info", "User_Name", $user_name);
 
@@ -28,21 +33,21 @@ if($user_email_retrieved != $user_email_input){Output::Fail("Email does not matc
 
 //set new password
 
-$UpdateSuccess = Database::StatementUpdateWhere("user_info", ["User_Password"], [$newPassword], "s", ["User_Name"], [$user_name], "s");
-if(!$UpdateSuccess){echo "could not update";}
 
 Database::EndConnection();
 
 
 $to       = $user_email_retrieved;
-$subject  = 'AfterDark Password Recovery';
+$subject  = 'ShareDraw Password Recovery';
 $message  = "Hello! Your account's password has been reset to $newPassword. Please change your password in the settings page";
-$headers  = 'From: AfterDark@gmail.com' . "\r\n" .
-            'MIME-Version: 1.0' . "\r\n" .
-            'Content-type: text/html; charset=utf-8';
 
-if(mail($to, $subject, $message, $headers))
+
+
+if(Mail::SendMail($to,$subject,$message))
 {
+    //if sent the mail then change password
+    $UpdateSuccess = Database::StatementUpdateWhere("user_info", ["User_Password"], [$newPassword], "s", ["User_Name"], [$user_name], "s");
+    if(!$UpdateSuccess){Output::Fail("Could not update password");}
     Output::Success("The Email has been sent!");
 }
 else

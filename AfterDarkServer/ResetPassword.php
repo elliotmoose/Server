@@ -1,8 +1,8 @@
 <?php
 
-require_once(__DIR__ . '/Database.php');
-require_once(__DIR__ . '/Output.php');
-require_once(__DIR__ . '/Mail.php');
+require_once('./Reusable/Database.php');
+require_once('./Reusable/Output.php');
+require_once('./Reusable/Mail.php');
 
 Database::BeginConnection();
 
@@ -17,6 +17,7 @@ if($user_name == null || $user_email_input == null)
 { 
     Output::Fail("Incomplete input");
 }
+
 //get user info from user name
 $userInfoRetrive = Database::SelectWhereColumn("*", "user_info", "User_Name", $user_name);
 
@@ -32,8 +33,6 @@ if($user_email_retrieved != $user_email_input){Output::Fail("Email does not matc
 
 //set new password
 
-$UpdateSuccess = Database::StatementUpdateWhere("user_info", ["User_Password"], [$newPassword], "s", ["User_Name"], [$user_name], "s");
-if(!$UpdateSuccess){echo "could not update";}
 
 Database::EndConnection();
 
@@ -46,6 +45,9 @@ $message  = "Hello! Your account's password has been reset to $newPassword. Plea
 $mailSent = Mail::SendMail($to,$subject,$message);
 if($mailSent)
 {
+    //if sent the mail then change password
+    $UpdateSuccess = Database::StatementUpdateWhere("user_info", ["User_Password"], [$newPassword], "s", ["User_Name"], [$user_name], "s");
+    if(!$UpdateSuccess){Output::Fail("could not update");}
     Output::Success("The Email has been sent!");
 }
 else

@@ -7,11 +7,11 @@ require_once('./Reusable/Files.php');
 
 //objective:
 //get subscription group IDs, names and owner (should be within info.txt of files)
-$userID = filter_input(INPUT_POST, "user_ID");
+$userID = filter_input(INPUT_POST, "User_ID");
 
 if($userID == null){Output::Fail("no ID");}
 Database::BeginConnection();
-$output = Database::SelectWhereColumn("subscriptions", "user_info", "user_ID", $userID);
+$output = Database::SelectWhereColumn("subscriptions", "user_info", "User_ID", $userID);
 
 //get the subscription IDs
 $subscriptionsJSON = $output[0]["subscriptions"];
@@ -30,7 +30,7 @@ foreach($subscriptionsArray as $subscriptionID)
         //remove this subscription ID from database
         
         //step 1: get IDs        
-        $subIDsOutput = Database::SelectWhereColumn("subscriptions", "user_info", "user_ID", $userID);
+        $subIDsOutput = Database::SelectWhereColumn("subscriptions", "user_info", "User_ID", $userID);
 
         //step 2: remove from array
         $subIDsArray = json_decode($subIDsOutput[0]["subscriptions"],true);
@@ -42,7 +42,7 @@ foreach($subscriptionsArray as $subscriptionID)
 
         //step 3: update database with new list
         
-        if (!Database::StatementUpdateWhere("user_info", ["subscriptions"], [json_encode($subIDsArray)], "s", ["user_ID"], [$userID], "s")) {            
+        if (!Database::StatementUpdateWhere("user_info", ["subscriptions"], [json_encode($subIDsArray)], "s", ["User_ID"], [$userID], "s")) {            
             Database::EndConnection();
             Output::Fail("failed to update database");
         }
@@ -65,7 +65,7 @@ foreach($subscriptionsArray as $subscriptionID)
     foreach($userIDArray as $singleUserID)
     {
         //get next user info
-        $userInfoOutput = Database::SelectWhereColumn("user_name,user_ID", "user_info", "user_ID", $singleUserID);
+        $userInfoOutput = Database::SelectWhereColumn("User_Displayname,User_ID", "user_info", "User_ID", $singleUserID);
         
         //pull out current list
         $users = $fileInfo["users"];

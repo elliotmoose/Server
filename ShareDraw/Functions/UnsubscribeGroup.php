@@ -31,7 +31,7 @@ if($user_ID == $infoTxt["owner_ID"])
 //======================================
 Database::BeginConnection();
 
-$subsDatabaseOutput = Database::SelectWhereColumn("subscriptions", "user_info", "user_ID", $user_ID);
+$subsDatabaseOutput = Database::SelectWhereColumn("subscriptions", "user_info", "User_ID", $user_ID);
 $subscriptions = json_decode($subsDatabaseOutput[0]["subscriptions"]);
 
 
@@ -45,7 +45,7 @@ if(($key=array_search($group_ID, $subscriptions)) !== false)
 
 
 //update database with new list
-if (!Database::StatementUpdateWhere("user_info", ["subscriptions"], [json_encode($subscriptions)], "s", ["user_ID"], [$user_ID], "s")) {
+if (!Database::StatementUpdateWhere("user_info", ["subscriptions"], [json_encode($subscriptions)], "s", ["User_ID"], [$user_ID], "s")) {
     Database::EndConnection();
     Output::Fail("failed to update database");
 }

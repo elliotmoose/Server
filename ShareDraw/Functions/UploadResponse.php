@@ -17,7 +17,6 @@ $images = $_FILES;
 if($user_ID == null){Output::Fail("no user ID");}
 if($group_ID == null){Output::Fail("no group ID");}
 if($assignment_ID == null){Output::Fail("no assignment ID");}
-if($images == null){Output::Fail("no images");}
 
 $assignmentFolder = "../Groups/$group_ID/$assignment_ID";
 
@@ -57,21 +56,27 @@ else
 }
 
 
+if($images != null)
+ {
+    foreach ($images as $name => $image) {
+        $destinationFile = "../Groups/$group_ID/$assignment_ID/$user_ID/$user_ID" . "_response.png";
 
-foreach ($images as $name => $image) {
-    $destinationFile = "../Groups/$group_ID/$assignment_ID/$user_ID/$user_ID" . "_response.png";
+        if (move_uploaded_file($image["tmp_name"], $destinationFile)) {
+            Output::Success("Images uploaded successfully");
+        } else {
+            Output::Fail("failed to upload" . $image["tmp_name"] . 'to' . "$assignment_ID");
+        }
+    }
+    
+    Output::Fail("Images failed to upload");
 
-    if(move_uploaded_file($image["tmp_name"], $destinationFile))
-    {      
-       Output::Success("Images uploaded successfully: $user_ID");    
-    }
-    else
-    {
-        Output::Fail("failed to upload" . $image["tmp_name"] . 'to' . "$assignment_ID");
-    }
+}
+else
+{
+    Output::Success("Comments uploaded successfully");
 }
 
-Output::Fail("Images failed to upload");
+
     
 
 

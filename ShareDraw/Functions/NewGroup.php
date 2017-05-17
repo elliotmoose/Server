@@ -40,8 +40,8 @@ if(!$infoTxt = fopen($dir . $groupID . '/info.txt', 'w+'))
 
 //step 4b: initialize info.txt text
 Database::BeginConnection();
-$databaseOutputArray = Database::SelectWhereColumn("user_name", "user_info", "user_ID", $owner_ID);
-$username = $databaseOutputArray[0]["user_name"];
+$databaseOutputArray = Database::SelectWhereColumn("User_Name", "user_info", "User_ID", $owner_ID);
+$username = $databaseOutputArray[0]["User_Name"];
 
 fwrite($infoTxt, '{"name":"'. addslashes($group_name) .'","owner_name": "'. addslashes($username).'","description": "'. addslashes($description).'","owner_ID" :"'. $owner_ID.'","group_ID":"' . $groupID . '"}');
 fclose($infoTxt);
@@ -59,11 +59,11 @@ fclose($userIDsTxt);
 
 //step 6: add userID into owners subscribed database
 //step 6a: get users subcribed array
-$databaseSubscriptionOutput = Database::SelectWhereColumn("subscriptions", "user_info", "user_ID", $owner_ID);
+$databaseSubscriptionOutput = Database::SelectWhereColumn("subscriptions", "user_info", "User_ID", $owner_ID);
 $subscriptions = json_decode($databaseSubscriptionOutput[0]["subscriptions"]);
 array_push($subscriptions,$groupID);
 //step 6b: update database
-if(!Database::StatementUpdateWhere("user_info", ["subscriptions"], [json_encode($subscriptions)], "s", ["user_ID"], [$owner_ID], "s"))
+if(!Database::StatementUpdateWhere("user_info", ["subscriptions"], [json_encode($subscriptions)], "s", ["User_ID"], [$owner_ID], "s"))
 {
     RemoveGroup($dir.$groupID);    
     Output::Fail("failed to update database");    

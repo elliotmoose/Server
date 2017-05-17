@@ -29,7 +29,7 @@ Files::OverrideFile($fileName, json_encode($userIDsArray));
 
 //step 2: fill in database subscription
 //step 2a: first get subscriptions
-$databaseSubscriptionOutput = Database::SelectWhereColumn("subscriptions", "user_info", "user_ID", $user_ID);
+$databaseSubscriptionOutput = Database::SelectWhereColumn("subscriptions", "user_info", "User_ID", $user_ID);
 
 $subscriptions = json_decode($databaseSubscriptionOutput[0]["subscriptions"]);
 
@@ -43,7 +43,7 @@ foreach ($subscriptions as $subscription) {
 //step 2c: update subscriptions
 array_push($subscriptions, $group_ID);
 
-if (!Database::StatementUpdateWhere("user_info", ["subscriptions"], [json_encode($subscriptions)], "s", ["user_ID"], [$user_ID], "s")) {
+if (!Database::StatementUpdateWhere("user_info", ["subscriptions"], [json_encode($subscriptions)], "s", ["User_ID"], [$user_ID], "s")) {
     
     Database::EndConnection();
     Output::Fail("failed to update database");

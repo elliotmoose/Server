@@ -9,7 +9,6 @@ require_once('./Reusable/Files.php');
 //get assignment names, IDs, descriptions
 
 $groupID = filter_input(INPUT_POST, "group_ID");
-//$groupID = "S13F";
 
 $outputArray = [];
 
@@ -27,11 +26,12 @@ foreach($iterator as $fileInfo)
         
         //add in submissions info into assignment info 
         $assignment_ID = $assignmentInfo["assignment_ID"];
-        $dir = "../Groups/$groupID/$assignment_ID";
-        $assignmentInfo["submissions"] = GetSubmissions($dir);
-        $assignmentInfo["responses"] = GetResponses($dir);
+        $assignmentFolderDir = "../Groups/$groupID/$assignment_ID";
+        $assignmentInfo["submissions"] = GetSubmissions($assignmentFolderDir);
+        $assignmentInfo["responses"] = GetResponses($assignmentFolderDir);
       
         array_push($outputArray,$assignmentInfo);
+        
     }
     
 }

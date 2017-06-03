@@ -22,7 +22,7 @@ else
 {
     $info = $output[0];
 
-    if (password_verify($password, $info['User_Password'])) {
+    if (password_verify($password, $info['Password'])) {
         Output::SuccessWithArray($info);
     } else {
         Output::Fail("Invalid Password");

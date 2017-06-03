@@ -50,7 +50,7 @@ if ($same_email_count['COUNT(*)']  > 0) {
 
 if ($username_ok && $email_ok) {
        
-    $values = [$firstname,$lastname,$username,$password,$email,$contact,$gender,$birthday];
+    $values = [$firstname,$lastname,$username,password_hash($password,PASSWORD_DEFAULT),$email,$contact,$gender,$birthday];
     
     foreach($values as $i)
     {

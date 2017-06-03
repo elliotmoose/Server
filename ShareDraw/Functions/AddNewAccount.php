@@ -46,7 +46,7 @@ if ($same_email_count['COUNT(*)']  > 0) {
 
 if ($username_ok && $email_ok) {
        
-    $values = [$displayname,$username,$password,$email];
+    $values = [$displayname,$username,password_hash($password,PASSWORD_DEFAULT),$email];
     
     foreach($values as $i)
     {

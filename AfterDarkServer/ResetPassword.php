@@ -46,7 +46,7 @@ $mailSent = Mail::SendMail($to,$subject,$message);
 if($mailSent)
 {
     //if sent the mail then change password
-    $UpdateSuccess = Database::StatementUpdateWhere("user_info", ["User_Password"], [$newPassword], "s", ["User_Name"], [$user_name], "s");
+    $UpdateSuccess = Database::StatementUpdateWhere("user_info", ["User_Password"], [password_hash($newPassword,PASSWORD_DEFAULT)], "s", ["User_Name"], [$user_name], "s");
     if(!$UpdateSuccess){Output::Fail("could not update");}
     Output::Success("The Email has been sent!");
 }

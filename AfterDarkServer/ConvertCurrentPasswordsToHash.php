@@ -22,7 +22,8 @@ foreach($users as $user)
 
     if(strlen($password) > 45)
     { 
-       Output::Fail("already hashed");
+       echo "password already hashed";
+       continue;   
     }
 
     if(Database::StatementUpdateWhere("user_info", ["User_Password"], [$hashedPassword], "s", ["User_Password"], [$password], "s"))

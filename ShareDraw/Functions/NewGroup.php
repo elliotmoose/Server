@@ -17,7 +17,7 @@ if($description == null){Output::Fail("empty description");}
 //step 1: generate random group ID
 $groupID = GenerateRandomAlphanumericString(6);
 
-//step 2: check for conflict
+//step 2: check for conflict -> generate new one
 $dir = '../Groups/';
 while(file_exists($dir . $groupID))
 {
@@ -40,6 +40,8 @@ if(!$infoTxt = fopen($dir . $groupID . '/info.txt', 'w+'))
 
 //step 4b: initialize info.txt text
 Database::BeginConnection();
+
+//get owner username
 $databaseOutputArray = Database::SelectWhereColumn("User_Name", "user_info", "User_ID", $owner_ID);
 $username = $databaseOutputArray[0]["User_Name"];
 

@@ -46,7 +46,7 @@ $message  = "Hello! Your account's password has been reset to $newPassword. Plea
 if(Mail::SendMail($to,$subject,$message))
 {
     //if sent the mail then change password
-    $UpdateSuccess = Database::StatementUpdateWhere("user_info", ["User_Password"], [$newPassword], "s", ["User_Name"], [$user_name], "s");
+    $UpdateSuccess = Database::StatementUpdateWhere("user_info", ["User_Password"], [password_hash($newPassword,PASSWORD_DEFAULT)], "s", ["User_Name"], [$user_name], "s");
     if(!$UpdateSuccess){Output::Fail("Could not update password");}
     Output::Success("The Email has been sent!");
 }

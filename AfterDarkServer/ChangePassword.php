@@ -29,11 +29,11 @@ if($oldPassFromDB == null)
     die();
 }
 
-if ($oldPass == $oldPassFromDB) {
+if (password_verify($oldPass, $oldPassFromDB)) {
     //change pass
 
     $update_columns = array("User_Password");
-    $update_values = array($newPass);
+    $update_values = array(password_hash($newPass,PASSWORD_DEFAULT));
     $to_set_types = "s";
     
     $condition_columns = $columns;

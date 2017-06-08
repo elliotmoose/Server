@@ -20,6 +20,8 @@ class Files
         if ($file = fopen($dir, 'w+')) {
             fwrite($file,$contents);
             fclose($file);
+            
+            return true;
         }
         else
         {

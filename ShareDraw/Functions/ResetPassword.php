@@ -34,7 +34,6 @@ if($user_email_retrieved != $user_email_input){Output::Fail("Email does not matc
 //set new password
 
 
-Database::EndConnection();
 
 
 $to       = $user_email_retrieved;
@@ -54,6 +53,7 @@ else
 {
     Output::Fail("The email could not send");
 }
+Database::EndConnection();
 
 function random_str($length, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
 {

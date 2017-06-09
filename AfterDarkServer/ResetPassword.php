@@ -11,8 +11,8 @@ $user_name = filter_input(INPUT_POST, "User_Name");
 $newPassword = random_str(6);
 
 
-$user_name = "mooselliot";
-$user_email_input = "elliot_koh_1997@yahoo.com.sg";
+//$user_name = "mooselliot";
+//$user_email_input = "elliot_koh_1997@yahoo.com.sg";
 //$2y$10$dRA3aYiI8wOiosatKJnkMOZC7rfRc6Bxp0/ci2RKznRqH.qPPmCWe
 if($user_name == null || $user_email_input == null)
 { 

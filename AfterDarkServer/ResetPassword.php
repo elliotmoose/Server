@@ -1,8 +1,8 @@
 <?php
 
-require_once('./Reusable/Database.php');
-require_once('./Reusable/Output.php');
-require_once('./Reusable/Mail.php');
+require_once('./Database.php');
+require_once('./Output.php');
+require_once('./Mail.php');
 
 Database::BeginConnection();
 
@@ -10,9 +10,10 @@ $user_email_input = filter_input(INPUT_POST, "User_Email");
 $user_name = filter_input(INPUT_POST, "User_Name");
 $newPassword = random_str(6);
 
+
 //$user_name = "mooselliot";
 //$user_email_input = "elliot_koh_1997@yahoo.com.sg";
-
+//$2y$10$dRA3aYiI8wOiosatKJnkMOZC7rfRc6Bxp0/ci2RKznRqH.qPPmCWe
 if($user_name == null || $user_email_input == null)
 { 
     Output::Fail("Incomplete input");
@@ -46,7 +47,7 @@ $mailSent = Mail::SendMail($to,$subject,$message);
 if($mailSent)
 {
     //if sent the mail then change password
-    $UpdateSuccess = Database::StatementUpdateWhere("user_info", ["User_Password"], [password_hash($newPassword,PASSWORD_DEFAULT)], "s", ["User_Name"], [$user_name], "s");
+    //$UpdateSuccess = Database::StatementUpdateWhere("user_info", ["User_Password"], [password_hash($newPassword,PASSWORD_DEFAULT)], "s", ["User_Name"], [$user_name], "s");
     if(!$UpdateSuccess){Output::Fail("could not update");}
     Output::Success("The Email has been sent!");
 }

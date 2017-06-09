@@ -1,3 +1,3 @@
-cd C:/MAMP/htdocs
+cd /var/www/html
 
-git pull origin master
+sudo git pull origin master

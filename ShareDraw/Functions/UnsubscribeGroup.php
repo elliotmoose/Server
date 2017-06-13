@@ -72,4 +72,46 @@ else //cant find key in userIDs.txt
 }
 
 
+//======================================
+//step 4: remove folders of this user within group
+//======================================
+if(is_dir('../Groups/' . $group_ID . '/' . $user_ID))//if there is a submission
+{
+    rrmdir('../Groups/' . $group_ID . '/' . $user_ID);
+}
+
+//edit info.txt of assignments
+
 Output::Success("you have unscubscribed!");
+
+
+
+function rrmdir($src)
+{
+    $dir = opendir($src);
+    while(false!== ($file = readdir($dir)))
+    {
+        if(($file != '.') && ($file != '..'))
+        {
+            $full = $src . '/' . $file;
+            if(is_dir($full))
+            {
+                rrmdir($full);
+            }
+            else
+            {
+                unlink($full);
+            }
+        }
+    }
+    
+    closedir($dir);
+    if(rmdir($src))
+    {
+        return true;        
+    }
+    else
+    {
+        return false;
+    }
+}

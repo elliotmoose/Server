@@ -75,9 +75,13 @@ else //cant find key in userIDs.txt
 //======================================
 //step 4: remove folders of this user within group
 //======================================
-if(is_dir('../Groups/' . $group_ID . '/' . $user_ID))//if there is a submission
+$assignmentFolders = scandir('../Groups/' . $group_ID);
+foreach($assignmentFolders as $assignmentFolder)
 {
-    rrmdir('../Groups/' . $group_ID . '/' . $user_ID);
+    if(is_dir('../Groups/' . $group_ID . '/' . $assignmentFolder . '/' . $user_ID))
+    {
+        rrmdir('../Groups/' . $group_ID . '/' . $assignmentFolder . '/' . $user_ID);
+    }
 }
 
 //edit info.txt of assignments

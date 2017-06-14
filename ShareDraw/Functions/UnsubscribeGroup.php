@@ -82,10 +82,11 @@ foreach($assignmentFolders as $assignmentFolder)
     {
         rrmdir('../Groups/' . $group_ID . '/' . $assignmentFolder . '/' . $user_ID);
     }
+    
+    
 }
 
 //edit info.txt of assignments
-
 Output::Success("you have unscubscribed!");
 
 

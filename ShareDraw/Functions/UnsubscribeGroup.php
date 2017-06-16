@@ -81,9 +81,7 @@ foreach($assignmentFolders as $assignmentFolder)
     if(is_dir('../Groups/' . $group_ID . '/' . $assignmentFolder . '/' . $user_ID))
     {
         rrmdir('../Groups/' . $group_ID . '/' . $assignmentFolder . '/' . $user_ID);
-    }
-    
-    
+    }        
 }
 
 //edit info.txt of assignments

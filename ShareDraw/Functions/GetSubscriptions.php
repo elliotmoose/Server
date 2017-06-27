@@ -39,6 +39,8 @@ foreach($subscriptionsArray as $subscriptionID)
         if($key!==false){            
             unset($subIDsArray[$key]);
         }
+        
+        $subIDsArray = array_values($subIDsArray);
 
         //step 3: update database with new list
         

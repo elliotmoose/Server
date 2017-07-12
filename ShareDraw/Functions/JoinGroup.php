@@ -43,6 +43,8 @@ foreach ($subscriptions as $subscription) {
 //step 2c: update subscriptions
 array_push($subscriptions, $group_ID);
 
+$subscriptions = array_values($subscriptions);
+
 if (!Database::StatementUpdateWhere("user_info", ["subscriptions"], [json_encode($subscriptions)], "s", ["User_ID"], [$user_ID], "s")) {
     
     Database::EndConnection();

@@ -41,8 +41,7 @@ if(($key=array_search($group_ID, $subscriptions)) !== false)
     unset($subscriptions[$key]);
 }
 
-
-
+$subscriptions = array_values($subscriptions);
 
 //update database with new list
 if (!Database::StatementUpdateWhere("user_info", ["subscriptions"], [json_encode($subscriptions)], "s", ["User_ID"], [$user_ID], "s")) {

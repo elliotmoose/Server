@@ -64,6 +64,9 @@ fclose($userIDsTxt);
 $databaseSubscriptionOutput = Database::SelectWhereColumn("subscriptions", "user_info", "User_ID", $owner_ID);
 $subscriptions = json_decode($databaseSubscriptionOutput[0]["subscriptions"]);
 array_push($subscriptions,$groupID);
+
+$subscriptions = array_values($subscriptions);
+
 //step 6b: update database
 if(!Database::StatementUpdateWhere("user_info", ["subscriptions"], [json_encode($subscriptions)], "s", ["User_ID"], [$owner_ID], "s"))
 {

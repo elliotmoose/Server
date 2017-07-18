@@ -3,8 +3,8 @@ body{
 	padding: 0;
 	background-color: white;
 	overflow: hidden;
-	height: 100vh;
-	width: 100vw;
+	height: 100%;
+	width: 100%;
 }
 
 #backgroundImage
@@ -53,9 +53,9 @@ body{
 	position: relative;
 	display: block;
 	float:left;
-	margin: 0px 0px 0px 30px; 
+	margin: 0px 0px 0px 60px; 
 
-	width: calc(100vw - 350px);
+	width: calc(100vw - 380px);
 	height: calc(100vh - 120px);
 
 	overflow-x:hidden;
@@ -107,29 +107,8 @@ body{
 
 	font-family: Ailerons;
 	font-size: 18px;
-	text-decoration: none;
-	color: black;
-	background-color: white;
-}
-
-#navBar button
-{
-	display:inline-block;
-	position: relative;
-
-	width: 100%;
-	height: 100%;
-
-	line-height: 30px;
-	margin:10px 0px 10px 0px;
-
-	transition-duration: 0.2s;
-	transition-timing-function: ease-in;
-
-	font-family: Ailerons;
-	font-size: 18px;
-	text-decoration: none;
-	color: black;
+	color:grey;
+	text-decoration: none;	
 	background-color: white;
 }
 
@@ -151,17 +130,22 @@ body{
 
 
 
-
+#images
+{
+	display: flex;
+	flex-wrap:wrap;
+	justify-content: center;
+}
 .whitebox
 {
 	position: relative;
 	margin: 0px 20px 20px 0px;
 	float: left;
 	
-	min-width: 240px;
-	min-height:160px;
-	width: 15vw;
-	height: auto;	
+	width: 30%;
+	height: 30%;
+	min-height: 300px;
+	min-width: 300px;
 
 	background-color: white;
 

@@ -1,10 +1,16 @@
 <html>
     <head>
-	<link rel ="stylesheet" type="text/css" href ="index.css"/>
+
+      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+      <script type="text/javascript" src="jquery-3.2.1.js"></script>
+      <script type="text/javascript" src="jquery.lazyload.js"></script>
+
+       <link rel ="stylesheet" type="text/css" href ="index.css"/>
     </head>
     
     <body>
-       
+         
+
         <img id = "backgroundImage" src="background2.jpeg">
           
         <div id = "container">
@@ -24,15 +30,10 @@
                     {
                         if(is_dir("images/" . $file))
                         {
-                            echo "<li><a href=\"" . $file . "\" onclick=\"return navBarElementPressed('".$file."');\">" . $file . "</a></li> ";
+                            echo "<li><a id = \"" .$file. "\" href=\"" . $file . "\" onclick=\"return navBarElementPressed('".$file."');\">" . $file . "</a></li> ";
                         }                        
                     }                    
                   }
-
-                 
-
-
-
                   
                 ?>           			            
            			<li><a href="about">ABOUT</a></li>
@@ -40,93 +41,23 @@
            			           				
            		</ul>
            </div>
+  
+          <script type="text/javascript">
+          document.getElementsByTagName("a")[0].style["color"] = "black";
+          </script>
 
-           
-
-           <div id = "content-body">	
-                     
-                  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-                  <script type="text/javascript" src="jquery-3.2.1.js"></script>
-                  <script type="text/javascript" src="jquery.lazyload.js"></script>
-                  <script type="text/javascript">
-
-                    var folder = "images/Featured/";
-                    var startingIndex = 0;
-                    var numberOfImages = 30;
-                    var displayedImageCount = 0; 
-                    var urlImagesToDisplay = new Array();
-                    $(document).ready(function()
-                      {                        
-                        refreshImagesForRange(0,10);
-                      });
-
+           <div id = "content-body">	                     
+                  <div id = "images">
                     
-                    function refreshImagesForRange(startIndex, rangeLength)
-                    {
-                      
-
-
-                      $.ajax({
-                          url : folder,
-                          success : function(data)
-                          {                   
-                                                                      
-                              $(data).find("a").attr("href",function(index,value)
-                                {
-                                  if(index >= startingIndex && displayedImageCount < (numberOfImages))
-                                  {
-                                    if(value.match(/\.(jpe?g|png|gif|)$/i))
-                                    {            
-                                      urlImagesToDisplay.push(folder + value);
-                                    }     
-                                  }
-
-                                                            
-                                });
-
-                              DisplayImageAtIndex(0);
-
-                          }
-
-                        });
-                    }
-
-
-                    function DisplayImageAtIndex(index)
-                    {
-                      if(index < urlImagesToDisplay.length)
-                      {
-                        var url = urlImagesToDisplay[index];
-                        var contentView = document.getElementById("content-body");                        
-                        contentView.innerHTML = contentView.innerHTML + "<img data-original=\"" + url + "\" class = \"whitebox lazy\" style=\"max-height:100\" >" ;                                            
-                        $("img.lazy").lazyload({
-                          effect : "fadeIn",                          
-                          container: $("#content-body"),
-                        });                        
-
-                      }  
-
-                      if(index < urlImagesToDisplay.length - 1)
-                        {
-                          DisplayImageAtIndex(index + 1);
-                        }        
-
-                        $(window).resize();           
-                    }
-
-                    function navBarElementPressed(pressed)
-                    {
-                      alert(pressed);
-                      return false;
-                    }
-
-                  </script>
-
-
-              </div>
+                  </div>   
+          </div>
 
 
            
         </div>
     </body>
+
+    <footer>
+      <script type="text/javascript" src="index.js"></script>
+    </footer>
 </html>

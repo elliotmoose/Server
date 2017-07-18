@@ -11,40 +11,38 @@ and open the template in the editor.
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel ="stylesheet" type="text/css" href ="HomeLayout.css"/>
+		<link rel ="stylesheet" type="text/css" href ="Home.css"/>
+        <link rel ="stylesheet" type="text/css" href ="NavBar.css"/>
 
     </head>
     
     <body>
         <ul id = "NavigationBar">
-            <li><a class = "navElement mobileCollapse"> AFTERDARK </a></li>
-            <li><a class = "navElement mobileCollapse" href="default.asp">Home</a></li>
+            <li><a class = "navElement mobileCollapse" href="Home.html"> AFTERDARK </a></li>
             <li><a class = "navElement mobileCollapse" href="news.asp">News</a></li>
             <li><a class = "navElement mobileCollapse" href="contact.asp">Contact</a></li>
             <li><a class = "navElement mobileCollapse" href="about.asp">About</a></li>
-			<li><a class = "rightNavElement mobileCollapse" href="about.asp">Login</a></li>
+			<li><a class = "rightNavElement mobileCollapse" href="Login.html">Login</a></li>
 			<li><a class = "rightNavElement mobileCollapse" href="about.asp">Sign Up</a></li>
         </ul>
 
         <div id = "container">
             <div id = "AfterdarkBannerContainer"  class="mobileHide">
-			    <img src="../Website/Images/NightCityBlurr.jpeg" alt="mainImage" style="width:100%;height:auto;" id = "mainImage">            
+			    <img src="../Website/Images/NightCityBlurr.jpeg" alt="mainImage" style="width:100%;height:100vh;" id = "mainImage">           
 				<div id = "AfterdarkBanner">AFTERDARK</div>
 				<div id = "AfterdarkBannerSubtitle" class="mobileHide">Your Passport To Bars</div>
-
+                <div id = "overflow" class ="testOverflow"></div>
 			</div>
 
-            <div id = "main">
-		<hr/>
-
-            </div>
-            
+            <div id = "main"></div>
+            <div id = "1" class = "green"></div>
+            <div id = "2" class = "blue"></div>
+             <div id = "3" class = "green"></div>
+            <div id = "4" class = "blue"></div>
+             <div id = "5" class = "green"></div>
+            <div id = "6" class = "blue"></div>
+                        
         </div>
-        
-
-        <?php
-            echo "hello";
-        /php>
 
            
     </body>

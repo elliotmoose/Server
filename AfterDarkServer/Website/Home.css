@@ -1,0 +1,136 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 26 Dec, 2016, 4:28:00 PM
+    Author     : elliotmoose
+*/
+@viewport
+{
+	width: 100px;
+}
+
+body
+{
+   margin: 0;
+   background-color: black;
+}
+#container
+{	
+	top: 65px;
+	float : left;
+	clear: both;
+    width: 100%;
+}
+
+#mainImage
+{
+	-webkit-filter: brightness(50%); 
+	
+}
+
+#AfterdarkBannerContainer
+{	
+	float: left;
+	width : 100%;
+    height: 100vh;
+	position : absolute;
+	overflow : scroll;
+}
+#AfterdarkBanner
+{
+	position:absolute;
+
+	top: 30vh;
+	left: 0;
+    text-align:center;
+
+	height: 200px;
+	width : 100%;
+	
+	font-family: Ailerons;
+	font-size: 200px;
+	color : white;
+}
+#AfterdarkBannerSubtitle
+{
+	position:absolute;
+
+	top:calc(30vh + 220px);
+	width : 100%;
+	
+	text-align: center;	
+	font-family: Ailerons;
+	font-size: 30px;
+	color : white;
+}
+
+#overflow
+{
+	/*top: 100vh;*/
+    height: 0px;
+    margin-bottom: 100vh;
+	width: 100%;
+	background-color: red;
+	opacity: 0.5;
+}
+
+/* Change the link color on hover */
+li a:hover {
+    	
+	background-color: #555;
+    color: white;
+}
+
+
+#main
+{	
+    background-color: green;
+    color: green;
+    height : 0px;
+}
+
+.green
+{
+width: 100%;
+height: 150px;
+background-color: green;
+}
+
+.blue
+{
+width: 100%;
+height: 150px;
+background-color: blue;
+}
+
+@font-face
+{
+    font-family: Ailerons;
+    src: url('../Website/Fonts/Ailerons-Typeface.otf');
+    
+}
+
+@media screen and (max-width: 1000px)
+{
+	.mobileCollapse
+	{
+		float : none;
+	}
+	
+	.mobileHide
+	{
+		display:none;
+	}
+	
+	#AfterdarkBannerContainer
+{
+	
+	width : auto;
+    height: 500px;
+	overflow : hidden;
+}
+
+}

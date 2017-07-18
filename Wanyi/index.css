@@ -1,22 +1,75 @@
 body{
 	margin: 0;
-	background-color: black;
+	padding: 0;
+	background-color: white;
+	overflow: hidden;
+	height: 100vh;
+	width: 100vw;
+}
+
+#backgroundImage
+{
+	position: absolute;
+	left:0px;
+	top:0px;
+
+	padding: 0px;	
+	opacity: 0.4;
+
+	width: 100vw;
+	height: 100vh;
+	overflow:hidden;
+	object-fit:cover;	
+	
 }
 
 #container
-{
-	overflow-y:hidden;
-	overflow-x: auto;
+{	
+	padding: 60px;
+	position: absolute;	
+	top: 0px;
+	float: left;
+	width: calc(100vw - 120px);
+	height: calc(100vh - 120px);
+	overflow: hidden;	
 }
 
-#navBar
-{
-	position: fixed;
-	background-color: white;
-	width: 100vw;
-	height: 40px;
 
+#navBar
+{	
+	position: relative;
+	display: block;
+	float:left;
+
+	width: 200px;
+	height: calc(100vh - 120px);
+
+	background-color: white;	
     box-shadow: 0px 2px 5px black;
+}
+
+#content-body
+{
+	position: relative;
+	display: block;
+	float:left;
+	margin: 0px 0px 0px 30px; 
+
+	width: calc(100vw - 350px);
+	height: calc(100vh - 120px);
+
+	overflow-x:hidden;
+	overflow-y:scroll; 	
+
+
+}
+
+#title
+{
+	font-family: Ailerons;
+	text-align: right;
+	font-size: 30px;
+	margin: 30px 10px 0px 0px;
 }
 
 #navBar > ul
@@ -30,68 +83,93 @@ body{
 #navBar > ul > li{
 	display:inline-block;
 	float:left;
-	min-width: 60px;
-	max-width: 100px;
-	text-align: center;
-	height:100%;
-	//background-color: yellow;
 
+	width:calc(100% - 15px );
+	height:30px;
+
+
+	text-align: right;
 }
 
 #navBar a
 {
 	display:inline-block;
 	position: relative;
-	line-height: 40px;
-	margin:0;
-	padding: 0px 10px 0px 10px;	
+
+	width: 100%;
 	height: 100%;
 
+	line-height: 30px;
+	margin:10px 0px 10px 0px;
 
 	transition-duration: 0.2s;
 	transition-timing-function: ease-in;
 
 	font-family: Ailerons;
-	font-size: 16px;
+	font-size: 18px;
 	text-decoration: none;
 	color: black;
 	background-color: white;
 }
 
+#navBar button
+{
+	display:inline-block;
+	position: relative;
+
+	width: 100%;
+	height: 100%;
+
+	line-height: 30px;
+	margin:10px 0px 10px 0px;
+
+	transition-duration: 0.2s;
+	transition-timing-function: ease-in;
+
+	font-family: Ailerons;
+	font-size: 18px;
+	text-decoration: none;
+	color: black;
+	background-color: white;
+}
+
+
+
+#navBar #list
+{
+	position: relative;
+	top:10px;
+}
+
 #navBar a:hover
 {
 	background-color: lightgrey;
-	transform: translateZ(10px);
 }
 
-#HomeImage
-{
-	width: 100vw;
-	height:calc(100vh - 40px);
-	opacity: 0.3;
-}
 
-#content-body
-{
-	margin-top: 40px;
-/*
-	display: block;
-	margin-left: 500px;
-	width: 50vw;
-	height: 2000px;
-	background-color:purple;
-	z-index: -2;*/
-}
+
+
+
+
 
 .whitebox
 {
-	
-	margin: 10px;
+	position: relative;
+	margin: 0px 20px 20px 0px;
 	float: left;
-	width: 100px;
-	height:100px;
+	
+	min-width: 240px;
+	min-height:160px;
+	width: 15vw;
+	height: auto;	
+
 	background-color: white;
+
+	object-fit:cover;
+
+	box-shadow: 0px 1px 3px black;
 }
+
 @font-face
 {
     font-family: Ailerons;

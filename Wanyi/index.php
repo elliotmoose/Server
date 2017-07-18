@@ -4,33 +4,127 @@
     </head>
     
     <body>
+       
+        <img id = "backgroundImage" src="background2.jpeg">
+          
         <div id = "container">
            <div id = "navBar"> 
-           		<ul>
-           			<li><div></div></li>
-           			<li><a href="Featured">FEATURED</a></li>
+              <h1 id = "title">
+                TWY PHOTOG
+              </h1>
+
+           		<ul id = "list">           			
+                <?php
+                  $dir = scandir("images/");
+                
+
+                  foreach($dir as $file)
+                  {
+                    if($file != ".."  && $file != ".")
+                    {
+                        if(is_dir("images/" . $file))
+                        {
+                            echo "<li><a href=\"" . $file . "\" onclick=\"return navBarElementPressed('".$file."');\">" . $file . "</a></li> ";
+                        }                        
+                    }                    
+                  }
+
+                 
+
+
+
+                  
+                ?>           			            
            			<li><a href="about">ABOUT</a></li>
            			<li><a href="Contact">CONTACT</a></li>
            			           				
-
            		</ul>
            </div>
 
+           
+
            <div id = "content-body">	
-              <div id="main_image" class="parrallax-layer-base">
-                  <img id = "HomeImage" src="randomHomeImage.jpeg">
-              </div>
+                     
+                  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+                  <script type="text/javascript" src="jquery-3.2.1.js"></script>
+                  <script type="text/javascript" src="jquery.lazyload.js"></script>
+                  <script type="text/javascript">
 
-              <div id="content_view" class="parrallax-layer-back">            
-                  <?php
-                    for($i = 0; $i < 10; $i++)
+                    var folder = "images/Featured/";
+                    var startingIndex = 0;
+                    var numberOfImages = 30;
+                    var displayedImageCount = 0; 
+                    var urlImagesToDisplay = new Array();
+                    $(document).ready(function()
+                      {                        
+                        refreshImagesForRange(0,10);
+                      });
+
+                    
+                    function refreshImagesForRange(startIndex, rangeLength)
                     {
-                        echo "<div class=whitebox> </div>";
-                    };
-                  ?>
+                      
+
+
+                      $.ajax({
+                          url : folder,
+                          success : function(data)
+                          {                   
+                                                                      
+                              $(data).find("a").attr("href",function(index,value)
+                                {
+                                  if(index >= startingIndex && displayedImageCount < (numberOfImages))
+                                  {
+                                    if(value.match(/\.(jpe?g|png|gif|)$/i))
+                                    {            
+                                      urlImagesToDisplay.push(folder + value);
+                                    }     
+                                  }
+
+                                                            
+                                });
+
+                              DisplayImageAtIndex(0);
+
+                          }
+
+                        });
+                    }
+
+
+                    function DisplayImageAtIndex(index)
+                    {
+                      if(index < urlImagesToDisplay.length)
+                      {
+                        var url = urlImagesToDisplay[index];
+                        var contentView = document.getElementById("content-body");                        
+                        contentView.innerHTML = contentView.innerHTML + "<img data-original=\"" + url + "\" class = \"whitebox lazy\" style=\"max-height:100\" >" ;                                            
+                        $("img.lazy").lazyload({
+                          effect : "fadeIn",                          
+                          container: $("#content-body"),
+                        });                        
+
+                      }  
+
+                      if(index < urlImagesToDisplay.length - 1)
+                        {
+                          DisplayImageAtIndex(index + 1);
+                        }        
+
+                        $(window).resize();           
+                    }
+
+                    function navBarElementPressed(pressed)
+                    {
+                      alert(pressed);
+                      return false;
+                    }
+
+                  </script>
+
+
               </div>
 
-           </div>
 
            
         </div>

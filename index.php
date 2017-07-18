@@ -1,3 +1,0 @@
-<?pho
-
-echo "welcome";

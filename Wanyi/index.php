@@ -2,8 +2,9 @@
     <head>
 
       <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-      <script type="text/javascript" src="jquery-3.2.1.js"></script>
-      <script type="text/javascript" src="jquery.lazyload.js"></script>
+      <script type="text/javascript" src="Plugins/jquery-3.2.1.js"></script>
+      <script type="text/javascript" src="Plugins/jquery.lazyload.js"></script>
+      <script type="text/javascript" src="Plugins/jquery.fancybox.min.js"></script>
 
        <link rel ="stylesheet" type="text/css" href ="index.css"/>
     </head>

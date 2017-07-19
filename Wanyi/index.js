@@ -22,9 +22,10 @@ function refreshImagesForRange(startIndex, rangeLength)
       {
         if(index >= startingIndex && urlImagesToDisplay.length < (rangeLength))
         {
+          
           if(value.match(/\.(jpe?g|png|gif|)$/i))
-          {            
-            urlImagesToDisplay.push(folder + displayedFolder + "/" + value);                                      
+          {                        
+            urlImagesToDisplay.push(value);                                      
           }     
         }
 
@@ -43,9 +44,29 @@ function DisplayImageAtIndex(index)
 {
   if(index < urlImagesToDisplay.length)
   {
-    var url = urlImagesToDisplay[index];
+    var fileFullName = urlImagesToDisplay[index];
+    var url = folder + displayedFolder + "/" + fileFullName;
     var imageContainer = document.getElementById("images");                                              
-    imageContainer.innerHTML = imageContainer.innerHTML + "<img data-original=\"" + url + "\" class = \"whitebox lazy\" style=\"max-height:100\" >" ;                                            
+
+    var removeString = fileFullName.match(/\.(jpe?g|png|gif|)$/i);
+    
+
+    //if there is a reference 
+    if(removeString != null && removeString != "")
+    {
+
+
+      var imageName = fileFullName.replace(removeString[0],"");   
+      imageContainer.innerHTML = imageContainer.innerHTML + "<div id= \""+imageName+"Container\" class=\"whiteboxGroup\" onclick=\"ImageClicked('"+imageName+"')\" ><img data-original=\"" + url + "\" class = \"whitebox lazy\" style=\"max-height:100\"><div id=\""+imageName+"Overlay\" class=\"whiteboxOverlay\">TEST</div></div>" ;                                                
+                     
+    }
+    else
+    {
+      imageContainer.innerHTML = imageContainer.innerHTML + "<img data-original=\"" + url + "\" class = \"whiteboxContainer lazy\" style=\"max-height:100\" >" ;                                                      
+    }
+
+
+
     $("img.lazy").lazyload({
       effect : "fadeIn",                          
       container: $("#content-body"),
@@ -59,6 +80,14 @@ function DisplayImageAtIndex(index)
   }        
 
          
+}
+
+function ImageClicked(imageName)
+{
+  document.getElementById(imageName+"Container").style["width"] = "100%";
+  document.getElementById(imageName+"Container").style["min-width"] = "100%";
+  document.getElementById(imageName+"Container").style["height"] = "100%";
+  document.getElementById(imageName+"Container").style["min-height"] = "100%";
 }
 
 function navBarElementPressed(folderPressed)

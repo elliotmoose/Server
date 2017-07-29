@@ -32,6 +32,8 @@ body{
 	width: calc(100vw - 120px);
 	height: calc(100vh - 120px);
 	overflow: hidden;	
+
+	display: flex;
 }
 
 
@@ -39,24 +41,25 @@ body{
 {	
 	position: relative;
 	display: block;
-	float:left;
+	
 
-	width: 200px;
-	height: calc(100vh - 120px);
+	min-width: 230px;
+	max-width: 300px;
+	width: 20%;
+	height: 100%;
 
 	background-color: white;	
     box-shadow: 0px 2px 5px black;
 }
 
 #content-body
-{
+{	
 	position: relative;
-	display: block;
-	float:left;
-	margin: 0px 0px 0px 60px; 
+		
+	margin: 0px 0px 0px 0px;
 
-	width: calc(100vw - 380px);
-	height: calc(100vh - 120px);
+	width: 100%;
+	height: 100%;
 
 	overflow-x:hidden;
 	overflow-y:scroll; 	
@@ -126,15 +129,12 @@ body{
 }
 
 
-
-
-
-
 #images
 {
+	margin-left: 60px;
 	display: flex;
 	flex-wrap:wrap;
-	justify-content: center;
+	justify-content: left;
 }
 .whitebox
 {
@@ -173,7 +173,7 @@ body{
 	display: flex;
 	position: relative;
 	margin: 0px 20px 20px 0px;
-	float: left;
+	
 	
 	width: 30%;
 	height: 30%;
@@ -191,6 +191,37 @@ body{
     font-family: Ailerons;
     src: url('/Fonts/Ailerons-Typeface.otf');
     
+}
+
+@media screen and (max-width: 1000px)
+{
+	#container
+	{
+		width: 100%;
+		padding: 0;
+		flex-wrap:wrap;
+	}
+
+	#navBar
+	{
+		margin: 0;
+		max-width: 100%;
+		min-width: 100%;
+		height: 200px;
+	}
+
+	.whiteboxGroup
+	{
+		width: 100%;
+		height: auto;
+		margin: 10px 0px 10px 0px;
+	}
+
+	#images
+	{
+		margin-left:0px; 
+	}
+
 }
 
 

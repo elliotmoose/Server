@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Places Searchbox</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #description {
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+      }
+
+      #infowindow-content .title {
+        font-weight: bold;
+      }
+
+      #infowindow-content {
+        display: none;
+      }
+
+      #map #infowindow-content {
+        display: inline;
+      }
+
+      .pac-card {
+        margin: 10px 10px 0 0;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        background-color: #fff;
+        font-family: Roboto;
+      }
+
+      #pac-container {
+        padding-bottom: 12px;
+        margin-right: 12px;
+      }
+
+      .pac-controls {
+        display: inline-block;
+        padding: 5px 11px;
+      }
+
+      .pac-controls label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+      }
+
+      #pac-input {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 400px;
+      }
+
+      #pac-input:focus {
+        border-color: #4d90fe;
+      }
+
+      #title {
+        color: #fff;
+        background-color: #4d90fe;
+        font-size: 25px;
+        font-weight: 500;
+        padding: 6px 12px;
+      }
+      #target {
+        width: 345px;
+      }
+    </style>
+  </head>
+  <body>
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    <div id="map"></div>
+    <script>
+      // This example adds a search box to a map, using the Google Place Autocomplete
+      // feature. People can enter geographical searches. The search box will return a
+      // pick list containing a mix of places and predicted search terms.
+
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+      function ExtractOpeningHoursFromPlace(place, index)
+      {
+        var open = "";
+        var close = "";
+
+        //day correction
+        var indexCopy = index;
+        var indexOffset = 0;
+        var gotOffset = false;
+        var looped = false;
+        while(!gotOffset)
+        {
+          try
+          {          
+            var day = place.opening_hours.periods[indexCopy].open.day;  
+            indexOffset = indexCopy - day; 
+            gotOffset = true;
+            break;
+          }          
+          catch(e){              
+              indexCopy = indexCopy + 1;
+
+              if(indexCopy > 6)
+              {
+                if(looped)
+                {
+                  //closed on this dya because cant read that days opening
+                  break;
+                }
+                else
+                {
+                  indexCopy -= 6;
+                  looped = true;
+                }                
+              }
+          }
+          
+        }
+        
+
+
+        var dayIndex = index + indexOffset;
+
+
+        //0000
+        //0030
+        //0100
+        //1300
+        //2300
+        
+        var am = false;
+        var flatTime = false;
+
+        try
+        {
+          open = place.opening_hours.periods[dayIndex].open.time;
+          open = StandardizeTime(open);      
+        }
+        catch(e){
+          open = 'CLOSED';
+        }
+
+        try
+        {
+          close = place.opening_hours.periods[dayIndex].close.time;
+          close = StandardizeTime(close);
+        }
+        catch(e){
+          close = 'CLOSED';
+        }
+
+        if(open == 'CLOSED' && close == 'CLOSED')
+        {
+          return 'CLOSED';
+        }
+        else
+        {
+          return open + "-" + close;
+        }
+        
+      }
+
+      function StandardizeTime(time)
+      {
+        var output = time;
+
+        var am = false;
+        var midnight = false;
+        //check 1: am vs pm (> 1200)
+        //check 2: if midnight(am) -> check if < 100 -> 12XX
+        //check 3: check for last 2 digit
+        
+        if(parseInt(time) < 1200)
+        {
+            am = true;
+            if(parseInt(time) < 100)
+            {
+                output = "12" + time.substring(time.length-2,time.length);
+            }
+        }      
+
+        //check if last 2 digits redundant
+        if(time.substring(time.length-2,time.length) == "00")
+        {
+            //remove 0s
+            output = output.substring(0,time.length-2);            
+        }        
+
+        //check if am/pm
+        if(am)
+        {          
+            output = parseInt(output) + "am";
+        }
+        else  //if pm
+        {
+            //if pm, correct from 24h to 12h timing
+            output = (parseInt(output) - 1200).toString();
+            //remove 0 at the front
+            output = parseInt(output) + "pm";
+        }
+
+
+          return output;
+      }
+
+      function initAutocomplete() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 1.3521, lng: 103.8198},
+          zoom: 13,
+          mapTypeId: 'roadmap'
+        });
+
+        // Create the search box and link it to the UI element.
+        var options = {
+          componentRestrictions: {country: 'sg'}
+        };
+        var input = document.getElementById('pac-input');
+        var autocomplete = new google.maps.places.Autocomplete(input,options);        
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+          autocomplete.setBounds(map.getBounds());
+        });
+
+        var marker = new google.maps.Marker({
+        map: map,
+        anchorPoint: new google.maps.Point(0, -29)
+        });
+
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        autocomplete.addListener('place_changed', function() {
+          
+          marker.setVisible(false);
+          var place = autocomplete.getPlace();
+          
+          var monOpeningHours = ExtractOpeningHoursFromPlace(place,1);
+          var tuesOpeningHours = ExtractOpeningHoursFromPlace(place,2);
+          var wedOpeningHours = ExtractOpeningHoursFromPlace(place,3);
+          var thursOpeningHours = ExtractOpeningHoursFromPlace(place,4);
+          var friOpeningHours = ExtractOpeningHoursFromPlace(place,5);
+          var satOpeningHours = ExtractOpeningHoursFromPlace(place,6);
+          var sunOpeningHours = ExtractOpeningHoursFromPlace(place,0);
+
+          var info = "Name: " + place.name + "\n" +"Website: " + place.website + "\n" + "Contact: " + place.formatted_phone_number + "\n" + "Monday: " + monOpeningHours + "\n" + "Tuesday: " + tuesOpeningHours + "\n"  + "Wednesday: " + wedOpeningHours + "\n"  + "Thursday: " + thursOpeningHours + "\n" + "Friday: " + friOpeningHours + "\n" + "Saturday: " + satOpeningHours + "\n" + "Sunday: " + sunOpeningHours + "\n"  ;
+          if(confirm("AUTOFILL AND REPLACE INFORMATION? \n" + info))
+          {
+            window.parent.document.getElementById('name').value = place.name;
+            window.parent.document.getElementById('contact').value = place.formatted_phone_number;
+            window.parent.document.getElementById('website').value = place.website;
+            window.parent.document.getElementById('OH_Monday').value = monOpeningHours;
+            window.parent.document.getElementById('OH_Tuesday').value = tuesOpeningHours;
+            window.parent.document.getElementById('OH_Wednesday').value = wedOpeningHours;
+            window.parent.document.getElementById('OH_Thursday').value = thursOpeningHours;
+            window.parent.document.getElementById('OH_Friday').value = friOpeningHours;
+            window.parent.document.getElementById('OH_Saturday').value = satOpeningHours;
+            window.parent.document.getElementById('OH_Sunday').value = sunOpeningHours;
+            window.parent.document.getElementById('location').value = place.formatted_address;
+            window.parent.document.getElementById('lat').value = place.geometry.latitude;
+            window.parent.document.getElementById('long').value = place.geometry.longitude;
+          }
+
+
+          //set field
+          window.parent.document.getElementById('location').value = place.formatted_address;
+          
+          if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+
+            var icon = {
+              url: place.icon,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(25, 25)
+            };
+
+            // If the place has a geometry, then present it on a map.
+        if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport);
+        } else {
+            map.setCenter(place.geometry.location);
+            map.setZoom(17);
+        }
+        
+        marker.setPosition(place.geometry.location);
+        marker.setVisible(true);
+                        
+        });
+      }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDr8co9-LGxlimQACfckiMKrJt7gpx0eds&libraries=places&callback=initAutocomplete"
+         async defer></script>
+  </body>
+</html>

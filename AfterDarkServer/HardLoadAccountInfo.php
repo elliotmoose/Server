@@ -1,7 +1,7 @@
 <?php
 
-require_once('./Reusable/Output.php');
-require_once('./Reusable/Database.php');
+require_once(__DIR__ .'/Output.php');
+require_once(__DIR__ .'/Database.php');
 
 Database::BeginConnection();
 

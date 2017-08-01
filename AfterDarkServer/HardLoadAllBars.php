@@ -1,4 +1,4 @@
-<?php
+yn<?php
 
 
 //this soft load means bar data excluding: 
@@ -14,6 +14,12 @@ $output = Database::Select($request, "bar_info");
 $finalOut = array();
 foreach ($output as $bar) {
     
+        
+    //check if enabled
+    if($bar["Enabled"] === 0)
+    {
+        continue;
+    }
     $bar_ID = $bar["Bar_ID"];
     //add number of images
     $path = (__DIR__ . "/Bar_Images/$bar_ID/");

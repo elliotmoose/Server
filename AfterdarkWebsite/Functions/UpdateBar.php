@@ -2,17 +2,24 @@
 
 require_once("../../AfterDarkServer/Database.php");
 
-  if(isset($_POST['registerBarFormSubmit']))
-  {
+$barID = filter_input(INPUT_POST,"Bar_ID");
 
-  }
-  else
-  {
-    header("location: ../RegisterBarForm.php");
-  }
+ if(!isset($_POST['editBarFormSubmit']))
+ {
+ 	if(isset($barID))
+ 	{
+ 		header("location: ../EditBarForm.php?Bar_ID=".$barID);
+ 	}
+	else
+	{
+		header("location: ../Home.php");
+	}
+ }
+
 
 
 Database::BeginConnection();
+
 
 $barName = filter_input(INPUT_POST,"Bar_Name");
 $description = filter_input(INPUT_POST,"Bar_Description");
@@ -30,11 +37,10 @@ $location_lat = filter_input(INPUT_POST,"Bar_Location_Latitude");
 $location_long = filter_input(INPUT_POST,"Bar_Location_Longitude");
 $exclusive = filter_input(INPUT_POST,"Exclusive");
 
-
 if(IsEmpty($barName) || IsEmpty($mon) || IsEmpty($tues) || IsEmpty($wed) || IsEmpty($thurs) || IsEmpty($fri) || IsEmpty($sat) || IsEmpty($sun))
 {
 	echo "Form not fully filled \n";
-	echo "<a href='../RegisterBarForm.php'>try again</a>";
+	echo "<a href='../EditBarForm.php?Bar_ID=".$barID."'>try again</a>";
 	die();
 }
 
@@ -53,11 +59,11 @@ if($website == null)
 	$website == "";
 }
 
-$select = Database::SelectWhereColumn("*", "bar_info", "Bar_Name", $barName);
+$select = Database::SelectWhereColumn("*", "bar_info", "Bar_ID", $barID);
 
-if(isset($select[0]))
+if(!isset($select[0]))
 {
-	echo("Bar already exists");
+	echo("Bar does not exist");
 	die("<a href='../Home.php'>back to bar list</a>");
 }
 
@@ -67,14 +73,13 @@ if($exclusive)
 	$exlusiveTinyInt = 1;
 }
 
-
-$success = Database::StatementInsert("bar_info",["Bar_Name","Bar_Description","Bar_Contact","Bar_Website","OH_Monday","OH_Tuesday","OH_Wednesday","OH_Thursday","OH_Friday","OH_Saturday","OH_Sunday","Bar_Address","Bar_Location_Latitude","Bar_Location_Longitude","Exclusive"],[$barName,$description,$contact,$website,$mon,$tues,$wed,$thurs,$fri,$sat,$sun,$locationAddress,$location_lat,$location_long,$exlusiveTinyInt],"ssssssssssssssi");
+$success = Database::StatementUpdateWhere("bar_info",["Bar_Name","Bar_Description","Bar_Contact","Bar_Website","OH_Monday","OH_Tuesday","OH_Wednesday","OH_Thursday","OH_Friday","OH_Saturday","OH_Sunday","Bar_Address","Bar_Location_Latitude","Bar_Location_Longitude","Exclusive"],[$barName,$description,$contact,$website,$mon,$tues,$wed,$thurs,$fri,$sat,$sun,$locationAddress,$location_lat,$location_long,$exlusiveTinyInt],"ssssssssssssssi",["Bar_ID"],[$barID],"s");
 
 if($success)
 {
-	echo("The bar has been added!");
+	echo("The bar has been updated!");
 
-
+	
 
 
 	die("<a href='../Home.php'>back to bar list</a>");

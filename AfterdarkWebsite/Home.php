@@ -79,7 +79,7 @@ function CheckForLastActivity()
     }
 
     td {
-   		border: 1px solid grey;
+   		border: 1px solid black;
    		padding: 0px;
    		margin: 0px;
         height: 100%;

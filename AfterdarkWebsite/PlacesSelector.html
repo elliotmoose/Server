@@ -200,22 +200,25 @@
             }
         }      
 
+        if(!am)
+        {
+            //if pm, correct from 24h to 12h timing (must corrent before removing 0s)
+            output = (parseInt(output) - 1200).toString();
+        }
         //check if last 2 digits redundant
         if(time.substring(time.length-2,time.length) == "00")
         {
             //remove 0s
-            output = output.substring(0,time.length-2);            
+            output = output.substring(0,output.length-2);            
         }        
 
-        //check if am/pm
+        //append am/pm
         if(am)
         {          
             output = parseInt(output) + "am";
         }
         else  //if pm
         {
-            //if pm, correct from 24h to 12h timing
-            output = (parseInt(output) - 1200).toString();
             //remove 0 at the front
             output = parseInt(output) + "pm";
         }
@@ -278,8 +281,8 @@
             window.parent.document.getElementById('OH_Saturday').value = satOpeningHours;
             window.parent.document.getElementById('OH_Sunday').value = sunOpeningHours;
             window.parent.document.getElementById('location').value = place.formatted_address;
-            window.parent.document.getElementById('lat').value = place.geometry.latitude;
-            window.parent.document.getElementById('long').value = place.geometry.longitude;
+            window.parent.document.getElementById('lat').value = place.geometry.location.lat();
+            window.parent.document.getElementById('long').value = place.geometry.location.lng();
           }
 
 

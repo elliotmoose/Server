@@ -3,7 +3,7 @@
 
 //this soft load means bar data excluding: 
 //images and discounts
-require_once(__DIR__ . '/Database.php');
+require_once('../../AfterDarkServer/Database.php');
 
 Database::BeginConnection();
 
@@ -12,19 +12,10 @@ $request = "Bar_Name,Bar_ID,Bar_Rating_Price,Bar_Rating_Ambience,Bar_Rating_Pric
 $output = Database::Select($request, "bar_info");
 
 $finalOut = array();
-foreach ($output as $bar) {
-        
-    //check if enabled
-    if($bar["Enabled"] == false)
-    {
-        continue;
-    }
-
-
-
+foreach ($output as $bar) {    
     $bar_ID = $bar["Bar_ID"];
     //add number of images
-    $path = (__DIR__ . "/Bar_Images/$bar_ID/");
+    $path = ("../../Bar_Images/$bar_ID/");
     $filecount = 0;
     $files = glob($path . "*");
 

@@ -152,8 +152,8 @@ function CheckForLastActivity()
     					<td>
     						<iframe src="PlacesSelector.html"></iframe>
     						<input id = 'location' name="Bar_Address" type="text">
-    						<input id = 'lat' name="Bar_Location_Latitude" type="text">	
-    						<input id = 'long' name="Bar_Location_Longitude" type="text">	    						
+    						<input id = 'lat' name="Bar_Location_Latitude" type="text" readonly>	
+    						<input id = 'long' name="Bar_Location_Longitude" type="text" readonly>	    						
     					</td>
     				</tr>
 					<tr>
@@ -168,11 +168,20 @@ function CheckForLastActivity()
     						
     					</td>
     				</tr>
-
+                    <tr>
+                        <th>
+                            Images:
+                        </th>
+                        <td align='right'>              
+                            <form id="imagesForm"> 
+                                <input type="file" multiple>
+                            </form>                                    
+                        </td>
+                    </tr>
 
     				<tr>
     					<td colspan='2'>
-    						<input id='submitButton' type="submit" value="submit" >
+    						<input id='submitButton' type="submit" name = "registerBarFormSubmit" value="submit" >
     					</td>    					
     				</tr>
     			</tbody>

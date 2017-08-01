@@ -15,7 +15,7 @@ $finalOut = array();
 foreach ($output as $bar) {
         
     //check if enabled
-    if($bar["Enabled"] == false)
+    if($bar["Enabled"] === 0)
     {
         continue;
     }

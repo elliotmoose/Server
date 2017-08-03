@@ -12,7 +12,7 @@ if($userID == null)
     Output::Fail("no user ID provided");    
 }
 
-$userInfo = Database::SelectWhereColumn("User_ID,User_Name,User_Email", "user_info", "User_ID", $userID);
+$userInfo = Database::SelectWhereColumn("User_ID,User_Name,User_Email,User_LoyaltyPts", "user_info", "User_ID", $userID);
 
 if($userInfo != null)
 {

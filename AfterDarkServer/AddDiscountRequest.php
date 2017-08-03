@@ -38,7 +38,7 @@ $merchant_ID = $merchantIDResult[0]["Merchant_ID"];
 
 if($merchant_ID == null)
 {
-    Output::Fail("Passcode not recognized");    
+    Output::Fail("Passcode not recognized - non given");    
 }
 
 //stage 2a: check bar ID from databse matches barID from post input        
@@ -46,7 +46,7 @@ $merchantBarID = $merchantIDResult[0]["Bar_ID"];
 
 if($Bar_ID != $merchantBarID)
 {    
-   Output::Fail(" Passcode not recognized");
+   Output::Fail(" Passcode not recognized: barID mismatch");
 }
     
 

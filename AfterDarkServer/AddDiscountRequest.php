@@ -38,7 +38,7 @@ $merchant_ID = $merchantIDResult[0]["Merchant_ID"];
 
 if($merchant_ID == null)
 {
-    Output::Fail("Passcode not recognized - non given");    
+    Output::Fail("Error: -0010");    
 }
 
 //stage 2a: check bar ID from databse matches barID from post input        
@@ -46,7 +46,7 @@ $merchantBarID = $merchantIDResult[0]["Bar_ID"];
 
 if($bar_ID != $merchantBarID)
 {    
-   Output::Fail(" Passcode not recognized: barID mismatch given: " . $bar_ID . " actual : " . $merchantBarID );
+   Output::Fail("Error: -0020");
 }
     
 
@@ -57,7 +57,7 @@ if($user_ID == null || $user_ID == "" || $user_name == null || $user_name == "" 
         $discount_ID == null || $discount_ID == "" || $merchant_ID == null || $merchant_ID == "" ||
         $date == null || $date == 0 || $date == "")
 {
-    Output::Fail("Incomplete Input");    
+    Output::Fail("Error: -0030");    
 }
 
 //get info about this discount
@@ -65,7 +65,7 @@ $discountInfoArr = Database::SelectWhereColumn("*", "discounts", "discount_ID", 
 
 if(count($discountInfoArr) == 0)
 {
-   Output::Fail("Discount does not exist");
+   Output::Fail("Discount currently not available");
 }
 
 $discountDeal = $discountInfoArr[0]["discount_amount"];
@@ -96,29 +96,28 @@ $columns = ["User_ID","User_Name","Bar_ID","Discount_Amount","Discount_Deal","Co
 $values = [$user_ID,$user_name,$bar_ID,$amount,$discountDeal,$date,$discountDescription];
 $success = Database::StatementInsert("claim_log", $columns, $values, "sssssss");
 
+if(!$success)
+{
+    Output::Fail("Could not claim the discount at the moment");   
+}
+
 //give points to user
 //get users initial points 
 $ptResultArray = Database::StatementSelectWhere("User_LoyaltyPts", "user_info", ["User_ID"], [$user_ID], "s");
 $oldLoyaltyPts = $ptResultArray[0]["User_LoyaltyPts"];
-$ptsColumns = ["User_LoyaltyPts"];
 $newLoyaltyPtsAmount = $amount + $oldLoyaltyPts;
-$ptsValues = [$newLoyaltyPtsAmount];
-$ptsSuccess = Database::StatementUpdateWhere("user_info", $ptsColumns, $ptsValues, "s", ["User_ID"],[$user_ID], "s");
-if($success && $ptsSuccess)
+$ptsSuccess = Database::StatementUpdateWhere("user_info", ["User_LoyaltyPts"], [$newLoyaltyPtsAmount], "s", ["User_ID"],[$user_ID], "s");
+
+if($success)
 {
-    Output::Success("Discount Authenticated!" . "$amount" ." points added!");    
-}
-else
-{
-    if($success && !$ptsSuccess)
+    if($ptsSuccess)
     {
-            Output::Fail("User ID and Name do not match");        
+        Output::Success("Discount Authenticated!" . "$amount" ." points added!");    
     }
     else
     {
-        
-            Output::Fail("Could not record this claim");
-    }
+        Output::Fail("Discount Authenticated, but points are not be available at the moment");
+    }    
 }
 
 Database::EndConnection();

@@ -5,9 +5,21 @@
 //images and discounts
 require_once(__DIR__ . '/Database.php');
 
-Database::BeginConnection();
+$con = Database::BeginConnection();
 
-$output = Database::Select("*", "bar_info");
+ 
+$query = "SELECT * FROM bar_info ORDER BY Bar_ID DESC";
+
+if (!$stmt = mysqli_prepare($con, $query)) {
+    Output::Fail("failed to prepare statement");
+}
+
+
+$output = Database::QueryStmtToArrayAssoc($stmt);
+
+
+
+
 
 $finalOut = array();
 foreach ($output as $bar) {

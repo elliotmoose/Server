@@ -46,7 +46,7 @@ $merchantBarID = $merchantIDResult[0]["Bar_ID"];
 
 if($Bar_ID != $merchantBarID)
 {    
-   Output::Fail(" Passcode not recognized: barID mismatch");
+   Output::Fail(" Passcode not recognized: barID mismatch given: " . $Bar_ID . " actual : " . $merchantBarID );
 }
     
 

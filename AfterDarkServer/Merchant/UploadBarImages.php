@@ -63,7 +63,7 @@ if($successUploadCount == count($_FILES))
 }
 else
 {    
-    Output::Fail("Images failed to upload");
+    Output::Fail("Images failed to upload: " . $successUploadCount);
     
 }
 

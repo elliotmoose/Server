@@ -24,6 +24,12 @@ Database::BeginConnection();
 $BarIDResults = Database::StatementSelectWhere("Bar_ID", "merchant_info", ["Merchant_ID"], [$merchant_ID], "s");
 $Bar_ID = $BarIDResults[0]["Bar_ID"];
 Database::EndConnection();
+
+if($Bar_ID == null)
+{
+    Output::Fail("Merchant ID does not exist: " . $merchant_ID);
+}
+
 $uploadFolder = "../Bar_Images/$Bar_ID";
 
 if (!file_exists($uploadFolder)) {
@@ -43,10 +49,9 @@ foreach ($files as $file) { // iterate files
 
 
 foreach ($images as $name => $image) {
-    $uploadFile = $uploadFolder . "/" . basename($image["name"]);
+    $uploadFile = $uploadFolder . "/" . basename($image["name"]);    
     
-
-
+    echo $uploadFile;
     if(move_uploaded_file($image["tmp_name"], $uploadFile))
     {
        $successUploadCount += 1;        
@@ -59,6 +64,7 @@ if($successUploadCount == count($_FILES))
 }
 else
 {
+    echo count($_FILES);
     Output::Fail("Images failed to upload");
     
 }

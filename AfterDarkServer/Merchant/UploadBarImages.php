@@ -55,6 +55,10 @@ foreach ($images as $name => $image) {
     {
        $successUploadCount += 1;        
     }
+    else
+    {
+        Output::Fail("Images failed to upload: " . $uploadFile . " " . $image["name"]);
+    }
 }
 
 if($successUploadCount == count($_FILES))
@@ -63,7 +67,7 @@ if($successUploadCount == count($_FILES))
 }
 else
 {    
-    Output::Fail("Images failed to upload: " . $successUploadCount);
+    Output::Fail("Images failed to upload: ");
     
 }
 

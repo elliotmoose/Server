@@ -33,7 +33,10 @@ if($Bar_ID == null)
 $uploadFolder = "../Bar_Images/$Bar_ID";
 
 if (!file_exists($uploadFolder)) {
-    mkdir($uploadFolder);
+    if(!mkdir($uploadFolder))
+    {
+        Output::Fail("Bar Image Folder Could Not Initialize");
+    }
 }
 
 $successUploadCount = 0;

@@ -15,7 +15,7 @@ foreach($output as $banner)
     $barID = Database::SelectWhereColumn("Bar_ID", "discounts", "discount_ID", $discountID);
             
     //set barID
-    $banner["Bar_ID"] = $barID[0]["Bar_ID"];    
+    $banner["Bar_ID"] = $barID[0]["Bar_ID"];            
     
     array_push($finalOutput,$banner);    
 }

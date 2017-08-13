@@ -7,7 +7,7 @@ if(isset($_SESSION['username']))
 }
 else
 {
-	header("location: login.html");
+	header("location: Login.html");
 }
 
 
@@ -89,7 +89,7 @@ function CheckForLastActivity()
         padding: 0;
         margin: 0;
 		width: 100%;
-		height: 100%;
+		height: 100px;
 	}
 
     tr td h1

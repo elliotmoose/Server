@@ -29,7 +29,7 @@ $locationAddress = filter_input(INPUT_POST,"Bar_Address");
 $location_lat = filter_input(INPUT_POST,"Bar_Location_Latitude");
 $location_long = filter_input(INPUT_POST,"Bar_Location_Longitude");
 $exclusive = filter_input(INPUT_POST,"Exclusive");
-
+$images = $_FILES;
 
 if(IsEmpty($barName) || IsEmpty($mon) || IsEmpty($tues) || IsEmpty($wed) || IsEmpty($thurs) || IsEmpty($fri) || IsEmpty($sat) || IsEmpty($sun))
 {
@@ -70,12 +70,83 @@ if($exclusive)
 
 $success = Database::StatementInsert("bar_info",["Bar_Name","Bar_Description","Bar_Contact","Bar_Website","OH_Monday","OH_Tuesday","OH_Wednesday","OH_Thursday","OH_Friday","OH_Saturday","OH_Sunday","Bar_Address","Bar_Location_Latitude","Bar_Location_Longitude","Exclusive"],[$barName,$description,$contact,$website,$mon,$tues,$wed,$thurs,$fri,$sat,$sun,$locationAddress,$location_lat,$location_long,$exlusiveTinyInt],"ssssssssssssssi");
 
-if($success)
+
+if(!$success)
 {
-	echo("The bar has been added!");
+	echo "failed to register with database";
+	die("<a href='../Home.php'>back to bar list</a>");
+}
+//
+//
+//				UPLOADING OF BAR IMAGESS
+//
+//
+$barIDResult = Database::StatementSelectWhere("Bar_ID", "bar_info",["Bar_Name"],[$barName],"s");
+$bar_ID = $barIDResult[0]["Bar_ID"];
+if(!isset($bar_ID))
+{
+    Output::Fail("no bar ID");    
+}
+
+if(!isset($images))
+{
+    Output::Fail("no images");    
+}
+
+$uploadFolder = $_SERVER['DOCUMENT_ROOT'] . "/AfterDarkServer/Bar_Images/$bar_ID";
+
+if (!file_exists($uploadFolder)) {
+    mkdir($uploadFolder);
+}
+
+$successUploadCount = 0;
+$failedUploadCount = 0;
+
+
+//check file types
+foreach ($images as $image)
+{
+
+    $ext = pathinfo($image["name"], PATHINFO_EXTENSION);
+    if (strtolower($ext) != "jpg" && strtolower($ext) != "jpeg")
+    {
+        Output::Fail("Images Must Be In jpg. Given: " . strtolower($ext));
+    }
+}
+
+foreach ($images as $image) {
+
+    $uploadFile = $uploadFolder . "/" . JpgImagesCount($uploadFolder) . ".jpg";    
+
+    if(move_uploaded_file($image["tmp_name"], $uploadFile) === true)
+    {
+       $successUploadCount += 1;        
+    }
+    else
+    {
+        $failedUploadCount += 1;
+    }
+}
+
+$imagesUploadSuccess = false;
+if($successUploadCount == count($_FILES) && $failedUploadCount == 0)
+{    
+  	  $imagesUploadSuccess = true;
+}
 
 
 
+//
+//
+//				CHECK IF SUCCESSFULLY REGISTERED BAR
+//
+//
+
+
+if($success && $imagesUploadSuccess)
+{	
+
+	echo("The bar has been added! ID:" . $bar_ID);
 
 	die("<a href='../Home.php'>back to bar list</a>");
 }
@@ -93,3 +164,21 @@ function IsEmpty(String $input)
 
 	return false;
 }
+
+
+function JpgImagesCount($uploadFolder)
+{
+    //count number of images
+    $fileCount = 0;
+    $files = glob($uploadFolder."/*"); // get all file names
+    foreach ($files as $file) { // iterate files
+        if (is_file($file) && pathinfo($file, PATHINFO_EXTENSION) == "jpg")
+        {
+            $fileCount += 1;
+        }
+    
+    }
+
+    return $fileCount;
+}
+

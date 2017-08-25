@@ -13,7 +13,7 @@ function RefreshBarDisplay()
 	container.innerHTML = "";
 	$.ajax(
 	{
-		url: '/AfterDarkServer/HardLoadAllBars.php',
+		url: '/Functions/HardLoadAllBarsDespiteDisabled.php',
 		success: function(data)
 	    {                         
 	    	var bars = JSON.parse(data);

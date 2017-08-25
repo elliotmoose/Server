@@ -51,7 +51,7 @@ function CheckForLastActivity()
     	<?php 
     		echo "Logged in as: " . $_SESSION['username'];				
     	?>
-        <form id="imagesForm" method="post" action="Functions/UploadBarImages.php">
+        <form id="imagesForm" method="post" action="Functions/UploadBarImages.php" enctype="multipart/form-data">
             
         </form>   
     	<form method="post" action="Functions/UpdateBar.php">

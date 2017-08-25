@@ -29,9 +29,9 @@ $locationAddress = filter_input(INPUT_POST,"Bar_Address");
 $location_lat = filter_input(INPUT_POST,"Bar_Location_Latitude");
 $location_long = filter_input(INPUT_POST,"Bar_Location_Longitude");
 $exclusive = filter_input(INPUT_POST,"Exclusive");
-$images = $_FILES;
+$images = $_FILES["imagesInput"];
 
-if(IsEmpty($barName) || IsEmpty($mon) || IsEmpty($tues) || IsEmpty($wed) || IsEmpty($thurs) || IsEmpty($fri) || IsEmpty($sat) || IsEmpty($sun))
+if(IsEmpty($barName) || IsEmpty($mon) || IsEmpty($tues) || IsEmpty($wed) || IsEmpty($thurs) || IsEmpty($fri) || IsEmpty($sat) || IsEmpty($sun) || IsEmpty($locationAddress) || IsEmpty($location_lat) || IsEmpty($location_long) || IsEmpty($exclusive) )
 {
 	echo "Form not fully filled \n";
 	echo "<a href='../RegisterBarForm.php'>try again</a>";
@@ -67,15 +67,14 @@ if($exclusive)
 	$exlusiveTinyInt = 1;
 }
 
-
-$success = Database::StatementInsert("bar_info",["Bar_Name","Bar_Description","Bar_Contact","Bar_Website","OH_Monday","OH_Tuesday","OH_Wednesday","OH_Thursday","OH_Friday","OH_Saturday","OH_Sunday","Bar_Address","Bar_Location_Latitude","Bar_Location_Longitude","Exclusive"],[$barName,$description,$contact,$website,$mon,$tues,$wed,$thurs,$fri,$sat,$sun,$locationAddress,$location_lat,$location_long,$exlusiveTinyInt],"ssssssssssssssi");
-
-
+$success = Database::StatementInsert("bar_info",["Bar_Name","Bar_Description","Bar_Contact","Bar_Website","OH_Monday","OH_Tuesday","OH_Wednesday","OH_Thursday","OH_Friday","OH_Saturday","OH_Sunday","Bar_Address","Bar_Location_Latitude","Bar_Location_Longitude","Exclusive","Enabled"],[$barName,$description,$contact,$website,$mon,$tues,$wed,$thurs,$fri,$sat,$sun,$locationAddress,$location_lat,$location_long,$exlusiveTinyInt,1],"ssssssssssssssii");
 if(!$success)
 {
-	echo "failed to register with database";
+    echo "failed to register with database";
+    echo json_encode($success);
 	die("<a href='../Home.php'>back to bar list</a>");
 }
+
 //
 //
 //				UPLOADING OF BAR IMAGESS
@@ -83,6 +82,7 @@ if(!$success)
 //
 $barIDResult = Database::StatementSelectWhere("Bar_ID", "bar_info",["Bar_Name"],[$barName],"s");
 $bar_ID = $barIDResult[0]["Bar_ID"];
+
 if(!isset($bar_ID))
 {
     Output::Fail("no bar ID");    
@@ -90,7 +90,7 @@ if(!isset($bar_ID))
 
 if(!isset($images))
 {
-    Output::Fail("no images");    
+    echo "no images";
 }
 
 $uploadFolder = $_SERVER['DOCUMENT_ROOT'] . "/AfterDarkServer/Bar_Images/$bar_ID";
@@ -102,6 +102,7 @@ if (!file_exists($uploadFolder)) {
 $successUploadCount = 0;
 $failedUploadCount = 0;
 
+echo "uploading" . " ". count($_FILES) ." " . "images... \n";
 
 //check file types
 foreach ($images as $image)
@@ -116,7 +117,7 @@ foreach ($images as $image)
 
 foreach ($images as $image) {
 
-    $uploadFile = $uploadFolder . "/" . JpgImagesCount($uploadFolder) . ".jpg";    
+    $uploadFile = $uploadFolder . "/" . JpgImagesCount($uploadFolder) . ".jpg";        
 
     if(move_uploaded_file($image["tmp_name"], $uploadFile) === true)
     {

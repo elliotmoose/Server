@@ -42,7 +42,7 @@ function CheckForLastActivity()
     		echo "Logged in as: " . $_SESSION['username'];				
     	?>
 
-    	<form method="post" action="Functions/RegisterBar.php">
+    	<form id="registerBarForm" method="post" action="Functions/RegisterBar.php" enctype="multipart/form-data">
     		<table align="center">
     			<tbody>
     				<tr>
@@ -152,8 +152,8 @@ function CheckForLastActivity()
     					<td>
     						<iframe src="PlacesSelector.html"></iframe>
     						<input id = 'location' name="Bar_Address" type="text">
-    						<input id = 'lat' name="Bar_Location_Latitude" type="text" readonly>	
-    						<input id = 'long' name="Bar_Location_Longitude" type="text" readonly>	    						
+    						<input id = 'lat' name="Bar_Location_Latitude" type="text">	
+    						<input id = 'long' name="Bar_Location_Longitude" type="text"> <!-- readonly-->
     					</td>
     				</tr>
 					<tr>
@@ -172,10 +172,8 @@ function CheckForLastActivity()
                         <th>
                             Images:
                         </th>
-                        <td align='right'>              
-                            <form id="imagesForm"> 
-                                <input type="file" multiple>
-                            </form>                                    
+                        <td align='right'>                                           
+                            <input form="registerBarForm" id="imagesInput" name="imagesInput[]" type="file" multiple>                                           
                         </td>
                     </tr>
 

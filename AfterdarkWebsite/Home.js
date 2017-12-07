@@ -9,19 +9,20 @@ RefreshBarDisplay();
 function RefreshBarDisplay()
 {	
 	var container = document.getElementById("barContainerBody");
-
+	
 	container.innerHTML = "";
 	$.ajax(
 	{
-		url: '/Functions/HardLoadAllBarsDespiteDisabled.php',
+		url: '/AfterDarkWebsite/Functions/HardLoadAllBarsDespiteDisabled.php',
 		success: function(data)
 	    {                         
-	    	var bars = JSON.parse(data);
+			var bars = JSON.parse(data);
+			console.log("ehello");
 	    	for(var i = 0; i < bars.length; i++)
 	    	{
 	    		var bar = bars[i];
 	    		var barName = bar["Bar_Name"];
-	    		var barStatus = false;	    		
+				var barStatus = false;	    				
 	    		if(bar["Enabled"] == 1)
 	    		{
 	    			barStatus = true;
@@ -35,6 +36,8 @@ function RefreshBarDisplay()
 	    }
 
 	});
+
+	
 }
 
 function RegisterBar()

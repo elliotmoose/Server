@@ -6,8 +6,9 @@ if(isset($_SESSION['username']))
 	CheckForLastActivity();
 }
 else
-{
-	header("location: Login.html");
+{    
+    die("could not log in: " . session_id());
+	//header("location: Login.html");
 }
 
 
